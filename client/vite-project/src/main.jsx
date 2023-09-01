@@ -4,9 +4,12 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import Navigation from './navigation'
+import SideNav from './sideNav'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { LoginContextProvider } from './context/loginContext'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +31,21 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <LoginContextProvider>
       <Navigation />
-      <RouterProvider router={router} />
+      <div className='container-fluid'>
+        <div className='row'>
+          <div className='col-2 border'>
+            <SideNav />
+          </div>
+          <div className='col-10 border'>
+            <div id="bgWeb" className=' border'>
+              <RouterProvider router={router} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
     </LoginContextProvider>
   </>
 )

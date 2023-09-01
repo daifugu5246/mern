@@ -1,0 +1,83 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(#FDE4D0, #F8BFBE);
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* Navigation bar customization */
+
+#TopNavbar {
+    background-color: #FD997F;
+}
+
+#btn-Search {
+    background-color: #FDE4D0;
+}
+
+#btn-Log_out {
+    background-color: #FEC4AC;
+}
+
+#leaf {
+    background-color: #FEC4AC;
+}
+
+#peach {
+    background-color: #FEC4AC;
+}
+
+#TopNavbar input {
+    background-color: #FEAE95;
+    transition: 0.2s;
+}
+
+#TopNavbar input:focus {
+    transition: 0.2s;
+    background-color: white;
+    box-shadow: none;
+}
+
+input.nosubmit {
+    width: 25vw;
+    border: 1px solid #555;
+    display: block;
+    padding: 9px 4px 9px 40px;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+}
+
+
+
+
+
+/* ---------------------------------- */
+
+/* Side Navigation bar customization */
+
+#SideNavbar {
+    border: solid 2px black;
+    background-color: #FD997F;
+    box-shadow: 2px 2px black;
+    width: fit-content;
+    border-radius: 50px;
+}
+
+
+/* ---------------------------------- */
+
+#bgWeb {
+    background-color: #FFEEE1;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+#bgCircle {
+    background-color: #ffeee1;
+    overflow: hidden;
+}
+
+#AlertNav {
+    background-color: #fec3b4;
+    rotate: -90deg;
+}
