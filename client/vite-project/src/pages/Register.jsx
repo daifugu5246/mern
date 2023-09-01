@@ -30,6 +30,7 @@ const Register = () => {
         })
         setUsername('')
         setPassword('')
+        setC_password('')
     }
     useEffect(() => {
         if (passwordConfirm() === false){
