@@ -6,7 +6,9 @@ import Home from './pages/Home'
 import Navigation from './navigation'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { LoginContextProvider } from './context/loginContext'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +30,22 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <LoginContextProvider>
       <Navigation />
-      <RouterProvider router={router} />
+      <div className='row'>
+        <div className='col-2 border py-5'>
+          <div id='SideNavbar' className='container rounded-pill d-flex flex-column align-items-center justify-content-center p-4'>
+            <div>a</div>
+            <div>b</div>
+          </div>
+
+        </div>
+        <div className='col-10 border'>
+          <div className='container border'>
+            <RouterProvider router={router} />
+          </div>
+        </div>
+      </div>
+
+
     </LoginContextProvider>
   </>
 )
