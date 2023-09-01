@@ -1,11 +1,13 @@
-import React, {createContext, useContext }from 'react'
+import React, { createContext, useContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-import {LoginContextProvider} from './context/loginContext'
+import Navigation from './navigation'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { LoginContextProvider } from './context/loginContext'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
   {
@@ -14,11 +16,11 @@ const router = createBrowserRouter([
     /*Remain Task: if not login can not go to home */
   },
   {
-    path:'/home/:username',
+    path: '/home/:username',
     element: <Home />,
   },
   {
-    path:'/register',
+    path: '/register',
     element: <Register />,
   }]
 )
@@ -26,7 +28,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <LoginContextProvider>
-      <RouterProvider router={router}/>
+      <Navigation />
+      <RouterProvider router={router} />
     </LoginContextProvider>
   </>
 )
