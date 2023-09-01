@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 
 function App() {
-    const [backendData, setBackendData] = useState([])
 
     useEffect(() => {
 
