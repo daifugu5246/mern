@@ -1,3 +1,12 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(#FDE4D0, #F8BFBE);
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
 /* Navigation bar customization */
 
 #TopNavbar {
@@ -44,3 +53,8 @@ input.nosubmit {
 
 
 /* ---------------------------------- */
+
+#bgWeb {
+    background-color: #FFEEE1;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}

@@ -30,20 +30,22 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <LoginContextProvider>
       <Navigation />
-      <div className='row'>
-        <div className='col-2 border py-5'>
-          <div id='SideNavbar' className='container rounded-pill d-flex flex-column align-items-center justify-content-center p-4'>
-            <div>a</div>
-            <div>b</div>
+      <div className='container-fluid'>
+        <div className='row'>
+          <div className='col-2 border'>
+            <div id='SideNavbar' className='container rounded-pill d-flex flex-column align-items-center justify-content-center p-4'>
+              <div>a</div>
+              <div>b</div>
+            </div>
           </div>
-
-        </div>
-        <div className='col-10 border'>
-          <div className='container border'>
-            <RouterProvider router={router} />
+          <div className='col-10 border'>
+            <div id="bgWeb" className=' border'>
+              <RouterProvider router={router} />
+            </div>
           </div>
         </div>
       </div>
+
 
 
     </LoginContextProvider>
