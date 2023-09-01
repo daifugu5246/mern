@@ -25,6 +25,22 @@ function App() {
                         <li className="nav-item">
                             <a className="nav-link" href="#">Link</a>
                         </li>
+                        <li className="nav-item">
+                            <a id='leaf' className="btn rounded-pill px-4" href="#">100,000</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Link</a>
+                        </li>
+                        <li className="nav-item">
+                            <a id='peach' className="btn rounded-pill px-4" href="#">100,000</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Link</a>
+                        </li>
+                        <li className="nav-item">
+                            <button id='btn-Log_out' className="btn rounded-pill px-4" type="submit">Log out</button>
+                        </li>
+
                         <Dropdown>
                             <Dropdown.Toggle variant="" id="dropdown-basic">
                                 Dropdown Navigation Button

@@ -17,8 +17,20 @@ body {
     background-color: #FDE4D0;
 }
 
+#btn-Log_out {
+    background-color: #FEC4AC;
+}
+
+#leaf {
+    background-color: #FEC4AC;
+}
+
+#peach {
+    background-color: #FEC4AC;
+}
+
 #TopNavbar input {
-    background-color: #D9D9D980;
+    background-color: #FEAE95;
     transition: 0.2s;
 }
 
