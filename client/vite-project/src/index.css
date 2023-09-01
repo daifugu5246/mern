@@ -61,6 +61,7 @@ input.nosubmit {
     background-color: #FD997F;
     box-shadow: 2px 2px black;
     width: fit-content;
+    border-radius: 50px;
 }
 
 
@@ -69,4 +70,14 @@ input.nosubmit {
 #bgWeb {
     background-color: #FFEEE1;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+#bgCircle {
+    background-color: #ffeee1;
+    overflow: hidden;
+}
+
+#AlertNav {
+    background-color: #fec3b4;
+    rotate: -90deg;
 }

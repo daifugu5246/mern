@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import Navigation from './navigation'
+import SideNav from './sideNav'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { LoginContextProvider } from './context/loginContext'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -33,10 +34,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <div className='container-fluid'>
         <div className='row'>
           <div className='col-2 border'>
-            <div id='SideNavbar' className='container rounded-pill d-flex flex-column align-items-center justify-content-center p-4'>
-              <div>a</div>
-              <div>b</div>
-            </div>
+            <SideNav />
           </div>
           <div className='col-10 border'>
             <div id="bgWeb" className=' border'>
