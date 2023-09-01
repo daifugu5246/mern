@@ -12,10 +12,6 @@ const port = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://myUser:user5246@161.246.127.24:9029/mydb?readPreference=primary&ssl=false',{ useNewUrlParser: true,useUnifiedTopology: true,authSource: 'mydb'})
-.catch((err) => console.error('Error connecting to database:',err))
-.then(() => console.log('Connected to database'))
-
 app.post('/register', (req, res) => {
     console.log('Reagister by: ',req.body)
     User.create({
