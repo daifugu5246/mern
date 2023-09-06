@@ -61,7 +61,7 @@ input.nosubmit {
     background-color: #FD997F;
     box-shadow: 2px 2px black;
     width: fit-content;
-    border-radius: 50px;
+    border-radius: 35px;
 }
 
 
@@ -69,7 +69,9 @@ input.nosubmit {
 
 #bgWeb {
     background-color: #FFEEE1;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 2px 1px;
+    border-radius: 25px;
+    min-height: 80vh;
 }
 
 #bgCircle {

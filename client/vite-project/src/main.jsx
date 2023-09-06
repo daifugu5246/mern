@@ -1,10 +1,19 @@
 import ReactDOM from 'react-dom/client'
 import './index.css'
+
+//Import pages
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
+import Profile from './pages/Profile'
+import Market from './pages/Market'
+import Artwork from './pages/Artwork'
+import Trend from './pages/Trend'
+
+//Import navigation bar and side navigation bar
 import Navigation from './navigation'
 import SideNav from './sideNav'
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { LoginContextProvider } from './context/loginContext'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -24,6 +33,22 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />
+  },
+  {
+    path: '/market',
+    element: <Market />
+  },
+  {
+    path: '/artwork',
+    element: <Artwork />
+  },
+  {
+    path: '/trend',
+    element: <Trend />
   }]
 )
 
@@ -33,19 +58,16 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Navigation />
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-2 border'>
+          <div className='col-1'>
             <SideNav />
           </div>
-          <div className='col-10 border'>
-            <div id="bgWeb" className=' border'>
+          <div className='col-11 px-4 pe-5'>
+            <div id="bgWeb" className='my-4 p-4'>
               <RouterProvider router={router} />
             </div>
           </div>
         </div>
       </div>
-
-
-
     </LoginContextProvider>
   </>
 )
