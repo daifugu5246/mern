@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
+import logo from './logo.png'
 
 function App() {
 
@@ -9,11 +10,13 @@ function App() {
     return (
         <nav id='TopNavbar' className="navbar navbar-expand-lg navbar-light border-bottom border-dark">
             <div className="container-fluid">
-                <a className="navbar-brand bg-white rounded-circle px-2" href="#">MP</a>
+                <a className="navbar-brand me-5" href="/">
+                    <img style={{ maxWidth: "40px" }} className='img-fluid' src={logo} />
+                </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <div className="collapse navbar-collapse ms-5" id="navbarSupportedContent">
                     <form className="d-flex ">
                         <input className="form-control me-2 rounded-pill border-0 nosubmit" type="search" id='Searchbar' name='Searchbar' placeholder='Search...' aria-label="Search" />
                         <button id='btn-Search' className="btn rounded-pill px-4" type="submit">Search</button>
