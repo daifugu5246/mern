@@ -3,11 +3,11 @@ import { useEffect } from 'react'
 function Circle(data) {
     return (
         <div className='text-center'>
-            <div className='container-fluid rounded-circle border border-dark my-1 p-3 d-flex justify-content-center border' id="bgCircle">
-                <a href={"/" + data.path}>
+            <a href={"/" + data.path}>
+                <div className='container-fluid rounded-circle border border-dark my-1 p-3 d-flex justify-content-center border' id="bgCircle">
                     <img className='img-fluid' src={data.image} alt="img" style={{ objectFit: "cover", maxWidth: "25px" }} />
-                </a>
-            </div>
+                </div>
+            </a>
             <p>{data.title}</p>
         </div >
     )

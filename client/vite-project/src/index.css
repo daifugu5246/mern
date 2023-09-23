@@ -72,6 +72,7 @@ input.nosubmit {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 2px 1px;
     border-radius: 25px;
     min-height: 80vh;
+    overflow-y: auto;
 }
 
 #bgCircle {
@@ -82,4 +83,15 @@ input.nosubmit {
 #AlertNav {
     background-color: #fec3b4;
     rotate: -90deg;
+}
+
+/* ---------------------------------- */
+
+/* Market customization */
+
+.ShadowObj {
+    border: solid 2px black;
+    background-color: #FD997F;
+    box-shadow: 2px 2px black;
+    border-radius: 35px;
 }
