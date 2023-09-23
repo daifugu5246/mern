@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const User = require('./users');
 
 const sellArtSchema = mongoose.Schema({
-    //Buffer keep binary data of image
+    //base64 keep binary data of image
     image: {
-        type: Buffer,
+        type: String,
     },
     //title of the image
     title: {
@@ -48,7 +48,7 @@ const sellArtSchema = mongoose.Schema({
     timestamp: {
         type: Date,
         default: Date.now,
-    }
+    },
 });
 
 module.exports = mongoose.model('SellArt', sellArtSchema);

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const User = require('./users');
 
 const bidArtSchema = mongoose.Schema({
-    //Buffer keep binary data of image
+    //base64 keep binary data of image
     image: {
-        type: Buffer,
+        type: String,
     },
     //title of the image
     title: {
@@ -56,18 +56,29 @@ const bidArtSchema = mongoose.Schema({
     },
     //start time
     start_at:{
-        type: Date,
+        type: Date,//end time at 00.00
         required: true,
     },
     //end time
     end_at:{
-        type: Date,
+        type: Date,//end time at 23.59
+        required: true,
+    },
+    //status of the image
+    status: {
+        type: String,
+        enum: ['WAITING','LIVE', 'END'],
         required: true,
     },
     //time created for bid
     timestamp: {
         type: Date,
         default: Date.now,
+    },
+    //optional
+    expired:{
+        type: Date,
+        //default: Date.now + 604800000,
     }
 });
 
