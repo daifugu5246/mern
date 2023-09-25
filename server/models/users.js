@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
+    //base64 keep binary data of image
     profile_img:{
-        type: Buffer, //to handle profile image
+        type: String, //to handle profile image
     },
     following_id:[{ //keep user_id of whose this user following is
         type: mongoose.Schema.Types.ObjectId,
