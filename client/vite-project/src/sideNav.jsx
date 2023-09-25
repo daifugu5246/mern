@@ -21,7 +21,7 @@ function SideNav() {
     return (
         <div id='SideNavbar' className='my-3 container  d-flex flex-column align-items-center justify-content-center p-1 py-4'>
             <Circle image="https://cdn-icons-png.flaticon.com/512/747/747376.png" title="User" path="profile" />
-            <Circle image="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" title="Market" path="market" />
+            <Circle image="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" title="Market" path="market/auction" />
             <Circle image="https://cdn-icons-png.flaticon.com/512/10493/10493896.png" title="Artwork" path="artwork" />
             <Circle image="https://cdn-icons-png.flaticon.com/512/6633/6633232.png" title="Trend" path="trend" />
             <div id='AlertNav' className='rounded-pill px-4 py-2 mt-5 mb-4'>

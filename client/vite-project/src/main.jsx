@@ -39,7 +39,11 @@ const router = createBrowserRouter([
     element: <Profile />
   },
   {
-    path: '/market',
+    path: '/market/purchase',
+    element: <Market />
+  },
+  {
+    path: '/market/auction',
     element: <Market />
   },
   {

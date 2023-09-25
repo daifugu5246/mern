@@ -67,12 +67,15 @@ input.nosubmit {
 
 /* ---------------------------------- */
 
+
 #bgWeb {
     background-color: #FFEEE1;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 2px 1px;
     border-radius: 25px;
     min-height: 80vh;
+    max-height: 80vh;
     overflow-y: auto;
+
 }
 
 #bgCircle {
@@ -84,6 +87,24 @@ input.nosubmit {
     background-color: #fec3b4;
     rotate: -90deg;
 }
+
+#bgWeb::-webkit-scrollbar {
+    width: 15px;
+    transition: 0.3s;
+}
+
+
+/* Handle */
+#bgWeb::-webkit-scrollbar-thumb {
+    background-color: #ddcfc4;
+    border-radius: 35px;
+
+}
+
+#bgWeb::-webkit-scrollbar-thumb:hover {
+    background-color: #DCBFA8;
+}
+
 
 /* ---------------------------------- */
 
