@@ -1,11 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import noti from "./noti.png"
+import setting from "./setting.png"
+import question from "./question.png"
 
 function Circle(data) {
   return (
-    <div className="text-center">
+    <div id={data.title} className="text-center">
       <a href={"/" + data.path}>
         <div
-          className="container-fluid rounded-circle border border-dark my-1 p-3 d-flex justify-content-center border"
+          className="container-fluid rounded-circle border border-dark  p-3 d-flex justify-content-center border"
           id="bgCircle"
         >
           <img
@@ -22,7 +25,13 @@ function Circle(data) {
 }
 
 function SideNav() {
-  useEffect(() => {}, []);
+  const [login, setLogin] = useState(1)
+  useEffect(() => {
+    setLogin(1)
+    const user = document.getElementById("User")
+    if (!login) user.style.display = "none"
+    else if (login) user.style.display = "block"
+  }, []);
   return (
     <div
       id="SideNavbar"
@@ -100,8 +109,43 @@ function SideNav() {
         title="Trend"
         path="trend"
       />
-      <div id="AlertNav" className="rounded-pill px-4 py-2 mt-5 mb-4">
-        alert
+
+      <div id="AlertNav" className="d-flex align-items-center flex-column rounded-pill py-1 mb-1">
+        <button type="button" className="btn border-0" data-bs-toggle="modal" data-bs-target="#noti">
+          <img className="img-fluid" src={noti} alt="img" style={{ objectFit: "cover", maxWidth: "20px" }} />
+        </button>
+
+        <div className="modal fade" id="noti" tabIndex="-1" aria-labelledby="ModalNoti" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="ModalNoti">Notification</h5>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                ...
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="/">
+          <img
+            className="img-fluid my-3"
+            src={setting}
+            alt="img"
+            style={{ objectFit: "cover", maxWidth: "20px" }}
+          />
+        </a>
+
+        <a href="/">
+          <img
+            className="img-fluid mb-3"
+            src={question}
+            alt="img"
+            style={{ objectFit: "cover", maxWidth: "20px" }}
+          />
+        </a>
+
       </div>
     </div>
   );

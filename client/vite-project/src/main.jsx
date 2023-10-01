@@ -62,7 +62,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Navigation />
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-1'>
+          <div className='col-1 d-flex align-items-center'>
             <SideNav />
           </div>
           <div className='col-11 px-4 pe-5'>
