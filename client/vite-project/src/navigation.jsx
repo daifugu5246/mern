@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import logo from './logo.png'
-import leaf from './pages/tea-leaf.png'
-import peach from './pages/peach.png'
-import basket from './pages/wicker-basket.png'
+import logo from './assets/logo.png'
+import leaf from './assets/tea-leaf.png'
+import peach from './assets/peach.png'
+import basket from './assets/wicker-basket.png'
 
 function NotLogin() {
     return (

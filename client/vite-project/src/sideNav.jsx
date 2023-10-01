@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import noti from "./noti.png"
-import setting from "./setting.png"
-import question from "./question.png"
+import noti from "./assets/noti.png"
+import setting from "./assets/setting.png"
+import question from "./assets/question.png"
 
 function Circle(data) {
   return (
@@ -115,39 +115,33 @@ function SideNav() {
           <img className="img-fluid" src={noti} alt="img" style={{ objectFit: "cover", maxWidth: "20px" }} />
         </button>
 
-        <div className="modal fade" id="noti" tabIndex="-1" aria-labelledby="ModalNoti" aria-hidden="true">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="ModalNoti">Notification</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div className="modal-body">
-                ...
-              </div>
+        <button type="button" className="btn border-0" data-bs-toggle="modal" data-bs-target="#noti">
+          <img className="img-fluid" src={setting} alt="img" style={{ objectFit: "cover", maxWidth: "20px" }} />
+        </button>
+
+        <button type="button" className="btn border-0 pb-3" data-bs-toggle="modal" data-bs-target="#noti">
+          <img className="img-fluid" src={question} alt="img" style={{ objectFit: "cover", maxWidth: "20px" }} />
+        </button>
+
+      </div>
+
+
+      <div className="modal fade" id="noti" tabIndex="-1" aria-labelledby="ModalNoti" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="ModalNoti">Notification</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body" style={{ minHeight: "500px" }}>
+              ...
             </div>
           </div>
         </div>
-        <a href="/">
-          <img
-            className="img-fluid my-3"
-            src={setting}
-            alt="img"
-            style={{ objectFit: "cover", maxWidth: "20px" }}
-          />
-        </a>
-
-        <a href="/">
-          <img
-            className="img-fluid mb-3"
-            src={question}
-            alt="img"
-            style={{ objectFit: "cover", maxWidth: "20px" }}
-          />
-        </a>
-
       </div>
     </div>
+
+
   );
 }
 

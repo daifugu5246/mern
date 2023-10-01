@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import purchase from './purchase.png'
-import auction from './auction.png'
-import leaf from './tea-leaf.png'
+import purchase from '../assets/purchase.png'
+import auction from '../assets/auction.png'
+import leaf from '../assets/tea-leaf.png'
 import { useNavigate } from 'react-router-dom'
 
 export default function Market() {
