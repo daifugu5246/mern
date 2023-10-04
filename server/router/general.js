@@ -50,4 +50,17 @@ router.post("/register", (req, res) => {
   });
 });
 
+router.get('/home/:username', (req, res) => {
+  Users.findOne({
+    username: req.params.username,
+  })
+  .then((user) => {
+    res.json(user);
+  })
+  .catch((err) => {
+    console.error("Error registering user", err);
+    res.status(500).send("Error registering user");
+  })
+});
+
 module.exports = router;
