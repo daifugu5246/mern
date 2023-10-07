@@ -64,6 +64,11 @@ input.nosubmit {
     border-radius: 35px;
 }
 
+#Artwork:hover {
+    transition: 0.2s;
+    background-color: #FCD3B4;
+}
+
 
 /* ---------------------------------- */
 
@@ -78,7 +83,7 @@ input.nosubmit {
 
 }
 
-#bgCircle {
+.bgCircle {
     background-color: #ffeee1;
     overflow: hidden;
 }

@@ -1,15 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import noti from "./assets/noti.png"
 import setting from "./assets/setting.png"
 import question from "./assets/question.png"
+import axios from 'axios'
+import { useLoginContext } from "./context/loginContext";
+import { Link, useNavigate } from "react-router-dom";
+
+axios.defaults.baseURL = 'http://localhost:5000'
+
 
 function Circle(data) {
+
+  function hoverCircle() {
+    const idcircle = document.getElementById(data.title)
+    idcircle.style.transition = "all 0.2s"
+    idcircle.style.backgroundColor = "#FCD3B4";
+  }
+  function normalCircle() {
+    const idcircle = document.getElementById(data.title)
+    idcircle.style.transition = "all 0.2s"
+    idcircle.style.backgroundColor = "#ffeee1";
+  }
+  useEffect(() => {
+
+  })
   return (
-    <div id={data.title} className="text-center">
-      <a href={"/" + data.path}>
+    <div id={data.path} className={"text-center " + data.d} onMouseOver={() => hoverCircle()} onMouseOut={() => normalCircle()}>
+      <Link to={"/" + data.path}>
         <div
-          className="container-fluid rounded-circle border border-dark  p-3 d-flex justify-content-center border"
-          id="bgCircle"
+          id={data.title}
+          className="container-fluid rounded-circle border border-dark  p-3 d-flex justify-content-center border bgCircle"
         >
           <img
             className="img-fluid"
@@ -18,20 +38,19 @@ function Circle(data) {
             style={{ objectFit: "cover", maxWidth: "25px" }}
           />
         </div>
-      </a>
+      </Link>
       <p>{data.title}</p>
     </div>
   );
 }
 
 function SideNav() {
-  const [login, setLogin] = useState(1)
+  const { isLoggedin } = useLoginContext()
   useEffect(() => {
-    setLogin(1)
-    const user = document.getElementById("User")
-    if (!login) user.style.display = "none"
-    else if (login) user.style.display = "block"
-  }, []);
+    const user = document.getElementById("profile")
+    if (!isLoggedin) user.style.display = "none"
+    else if (isLoggedin) user.style.display = "block"
+  });
   return (
     <div
       id="SideNavbar"
@@ -45,7 +64,7 @@ function SideNav() {
       <Circle
         image="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
         title="Market"
-        path="market/auction"
+        path="auction"
       />
       <button
         type="button"
@@ -53,10 +72,11 @@ function SideNav() {
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
-        <div className="text-center">
+        <div id="artwork" className="text-center ">
+
           <div
-            className="container-fluid rounded-circle border border-dark my-1 p-3 d-flex justify-content-center border"
-            id="bgCircle"
+            id="Artwork"
+            className="container-fluid rounded-circle border border-dark  p-3 d-flex justify-content-center border bgCircle"
           >
             <img
               className="img-fluid"
