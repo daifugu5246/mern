@@ -9,7 +9,7 @@ const app = express();
 const port = 5000;
 
 app.use(cors());
-app.use(bodyParser.json({limit: '16mb'}));
+app.use(bodyParser.json({ limit: '16mb' }));
 
 db_connect()
 
