@@ -14,7 +14,13 @@ router.post("/login", (req, res) => {
   })
     .then((user) => {
       if (user) {
-        res.status(200).send("Logged in successfully");
+        res.status(200).json({
+          uid: user._id,
+          username: user.username,
+          name: user.name,
+          peach: user.peach,
+          leaf: user.leaf
+        });
       } else {
         res.status(401).send("Invalid username or password");
       }
@@ -48,19 +54,6 @@ router.post("/register", (req, res) => {
         });
     }
   });
-});
-
-router.get('/home/:username', (req, res) => {
-  Users.findOne({
-    username: req.params.username,
-  })
-  .then((user) => {
-    res.json(user);
-  })
-  .catch((err) => {
-    console.error("Error registering user", err);
-    res.status(500).send("Error registering user");
-  })
 });
 
 module.exports = router;
