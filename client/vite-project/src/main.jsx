@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 
 //Import pages
+import App from './App.jsx'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
@@ -14,7 +15,7 @@ import Trend from './pages/Trend'
 import Navigation from './navigation'
 import SideNav from './sideNav'
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { BrowserRouter, createBrowserRouter } from 'react-router-dom'
 import { LoginContextProvider } from './context/loginContext'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
@@ -39,11 +40,11 @@ const router = createBrowserRouter([
     element: <Profile />
   },
   {
-    path: '/market/purchase',
+    path: '/purchase',
     element: <Market />
   },
   {
-    path: '/market/auction',
+    path: '/auction',
     element: <Market />
   },
   {
@@ -58,20 +59,19 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-    <LoginContextProvider>
-      <Navigation />
-      <div className='container-fluid'>
-        <div className='row'>
-          <div className='col-1'>
-            <SideNav />
-          </div>
-          <div className='col-11 px-4 pe-5'>
-            <div id="bgWeb" className='my-4 p-4'>
-              <RouterProvider router={router} />
+    <BrowserRouter>
+      <LoginContextProvider>
+
+        <Navigation />
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-1 d-flex align-items-center'>
+              <SideNav />
             </div>
+            <App />
           </div>
         </div>
-      </div>
-    </LoginContextProvider>
+      </LoginContextProvider>
+    </BrowserRouter>
   </>
 )

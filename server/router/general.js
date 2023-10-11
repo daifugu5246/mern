@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("../models/users.js");
+const Users = require("../models/users.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -8,13 +8,19 @@ router.get("/", (req, res) => {
 
 router.post("/login", (req, res) => {
   console.log("Logging in by: ", req.body);
-  User.findOne({
+  Users.findOne({
     username: req.body.username,
     password: req.body.password,
   })
     .then((user) => {
       if (user) {
-        res.status(200).send("Logged in successfully");
+        res.status(200).json({
+          uid: user._id,
+          username: user.username,
+          name: user.name,
+          peach: user.peach,
+          leaf: user.leaf
+        });
       } else {
         res.status(401).send("Invalid username or password");
       }
@@ -27,13 +33,15 @@ router.post("/login", (req, res) => {
 
 router.post("/register", (req, res) => {
   console.log("Reagister by: ", req.body);
-  User.findOne({
+  Users.findOne({
     username: req.body.username,
   }).then((user) => {
     if (user) {
       res.status(401).send("This username already exists");
     } else {
       User.create({
+        email: req.body.email,
+        name: req.body.name,
         username: req.body.username,
         password: req.body.password,
       })

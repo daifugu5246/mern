@@ -6,7 +6,7 @@ const useLoginContext = () => {
     return useContext(LoginContext)
 }
 
-const LoginContextProvider = ({children}) => {
+const LoginContextProvider = ({ children }) => {
     const [isLoggedin, setIsLoggedin] = useState(false)
 
     const login = () => {
