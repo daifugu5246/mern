@@ -118,3 +118,20 @@ input.nosubmit {
     box-shadow: 2px 2px black;
     border-radius: 35px;
 }
+
+
+
+#ArtworkModal::-webkit-scrollbar {
+    width: 15px;
+    transition: 0.3s;
+}
+
+#ArtworkModal::-webkit-scrollbar-thumb {
+    background-color: #ddcfc4;
+    border-radius: 35px;
+
+}
+
+#ArtworkModal::-webkit-scrollbar-thumb:hover {
+    background-color: #DCBFA8;
+}
