@@ -11,7 +11,6 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [errorText, setErrorText] = useState('')
     const { isLoggedin, login } = useLoginContext()
-    console.log(isLoggedin)
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -21,8 +20,9 @@ const Login = () => {
         }).then((response) => {
             console.log(response.status)
             if (response.status === 200) {
-                login()
-                navigate(`/home/${username}`);
+                console.log(response.data.uid, response.data.username, response.data.name, response.data.leaf, response.data.peach)
+                login(response.data.uid, response.data.username, response.data.name, response.data.leaf, response.data.peach)
+                navigate('/auction');
             }
             else {
                 setErrorText(response.data)

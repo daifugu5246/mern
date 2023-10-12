@@ -33,7 +33,7 @@ function NotLogin() {
     )
 }
 
-function Loggedin() {
+function Loggedin(data) {
     const { logout } = useLoginContext()
     const navigate = useNavigate()
     function Logout() {
@@ -57,11 +57,11 @@ function Loggedin() {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 position-absolute end-0 d-flex align-items-center">
                         <li className="nav-item">
                             <img style={{ maxWidth: "25px" }} className='img-fluid me-3' src={leaf} />
-                            <Link id='leaf' className="btn rounded-pill px-4" to="#">100,000</Link>
+                            <Link id='leaf' className="btn rounded-pill px-4" to="#">{data.leaf}</Link>
                         </li>
                         <li className="nav-item">
                             <img style={{ maxWidth: "25px" }} className='img-fluid mx-3' src={peach} />
-                            <Link id='peach' className="btn rounded-pill px-4" to="#">100,000</Link>
+                            <Link id='peach' className="btn rounded-pill px-4" to="#">{data.peach}</Link>
                         </li>
                         <li className="nav-item">
                             <Link><img style={{ maxWidth: "45px", backgroundColor: "#FDE4D0" }} className='mx-3 border rounded-circle p-2' src={basket} /></Link>
@@ -83,13 +83,13 @@ function Loggedin() {
 export default function Navigationbar() {
     const { isLoggedin } = useLoginContext()
     useEffect(() => {
-        if (!isLoggedin) {
+        if (!isLoggedin.auth) {
             const n1 = document.getElementsByClassName("loggedin")[0]
             const n2 = document.getElementsByClassName("notlogin")[0]
             n1.style.display = "none"
             n2.style.display = "block"
         }
-        else if (isLoggedin) {
+        else if (isLoggedin.auth) {
             const n1 = document.getElementsByClassName("loggedin")[0]
             const n2 = document.getElementsByClassName("notlogin")[0]
             n1.style.display = "block"
@@ -99,7 +99,7 @@ export default function Navigationbar() {
     return (
         <>
             <NotLogin />
-            <Loggedin />
+            <Loggedin leaf={isLoggedin.leaf} peach={isLoggedin.peach} />
         </>
 
     )

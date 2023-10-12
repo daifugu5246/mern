@@ -48,8 +48,8 @@ function SideNav() {
   const { isLoggedin } = useLoginContext()
   useEffect(() => {
     const user = document.getElementById("profile")
-    if (!isLoggedin) user.style.display = "none"
-    else if (isLoggedin) user.style.display = "block"
+    if (!isLoggedin.auth) user.style.display = "none"
+    else if (isLoggedin.auth) user.style.display = "block"
   });
   return (
     <div
