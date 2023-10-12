@@ -95,7 +95,7 @@ export default function Navigationbar() {
             n1.style.display = "block"
             n2.style.display = "none"
         }
-    })
+    }, [isLoggedin.auth])
     return (
         <>
             <NotLogin />

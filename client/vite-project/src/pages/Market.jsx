@@ -28,8 +28,8 @@ function Auction(data) {
 
                     return (
                         <div key={index} className='col-3 mb-3'>
-                            <div className='ShadowObj rounded' style={{ minHeight: "322px", maxHeight: "322px" }}>
-                                <img style={{ minHeight: "240px", objectFit: "cover" }} className='' src={"data:image/jpeg;base64," + picture.image} alt={picture.title} />
+                            <div className='ShadowObj rounded' style={{ minHeight: "322px" }}>
+                                <img style={{ borderRadius: 5, height: "240px", width: "293px", objectFit: "cover" }} loading='lazy' className='' src={"data:image/jpeg;base64," + picture.image} alt={picture.title} />
                                 <div style={{ minHeight: "82px" }} className='border-top border-5 border-dark d-flex align-items-center justify-content-center'>
                                     <img style={{ maxWidth: "30px" }} className='img-fluid me-2 mb-2' src={leaf} />
                                     <h4 className='fw-bold'>{picture.current_price}</h4>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import noti from "./assets/noti.png";
 import setting from "./assets/setting.png";
 import question from "./assets/question.png";
@@ -46,12 +46,35 @@ function Circle(data) {
 }
 
 function SideNav() {
+
   const { isLoggedin } = useLoginContext();
+  const [state, isstate] = useState(1);
+
   useEffect(() => {
     const user = document.getElementById("profile")
     if (!isLoggedin.auth) user.style.display = "none"
     else if (isLoggedin.auth) user.style.display = "block"
-  });
+
+    const sell = document.getElementById("pills-sell-tab");
+    const auction = document.getElementById("pills-auction-tab");
+    if (state) {
+
+      sell.style.backgroundColor = "#CF594D";
+      sell.style.color = "white";
+      auction.style.backgroundColor = "#FFD7B9";
+      auction.style.color = "black";
+
+    }
+    else {
+      sell.style.backgroundColor = "#FFD7B9";
+      sell.style.color = "black";
+      auction.style.backgroundColor = "#CF594D";
+      auction.style.color = "white";
+
+    }
+
+
+  }, [state, isLoggedin.auth]);
   return (
     <div
       id="SideNavbar"
@@ -121,91 +144,55 @@ function SideNav() {
               padding: "0px",
             }}
           >
-            <div className="modal-header-centered">
-              <div className="text-center">
-                <button
-                  type="button"
-                  className="btn"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(to left, #F5C6F7 , #FF9C7D )",
-                    border: "solid 2px black",
-                    borderRadius: "45px",
-                    width: "150px",
-                    marginTop: "0px",
-                    marginBottom: "0px",
-                  }}
-                >
-                  Sell
-                </button>
-
-                <button
-                  type="button"
-                  className="btn"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(to left, #F5C6F7 , #FF9C7D )",
-                    border: "solid 2px black",
-                    borderRadius: "45px",
-                    width: "100px",
-                    marginTop: "0px",
-                    marginBottom: "0px",
-                  }}
-                >
-                  Auction
-                </button>
-              </div>
-            </div>
 
             <div
               className="modal-body"
               style={{ margin: "0px", padding: "0px" }}
             >
-              <ul className="nav justify-content-evenly">
-                <li
-                  className="nav-item display-flex"
-                  role="presentation"
-                  id="pill-sell-item"
-                >
-                  <button
-                    className="nav-link active"
-                    id="pills-sell-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-sell"
-                    type="button"
-                    role="tab"
-                    aria-controls="pills-sell"
-                    aria-selected="true"
-                    /* style={{ height: "61px"}}*/
+              <ul className="nav">
+                <button
+                  onClick={() => isstate(1)}
+                  className="col-6 d-flex py-auto justify-content-center border-0 border-end border-black border-1 align-items-center"
+                  id="pills-sell-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-sell"
+                  aria-controls="pills-sell"
+                  aria-selected="true"
 
-                    style={{
-                      height: "61px",
-                      radius: "45px 0px 0px 0px",
-                      background: "#CF594D",
-                      borderRadius: "45px 0px 0px 0px",
-                      marginLeft: "0px",
-                      padding: "10px",
-                      paddingLeft: "auto",
-                    }}
+                  /* style={{ height: "61px"}}*/
+
+                  style={{
+                    height: "61px",
+                    transition: "0.5s"
+                  }}
+                >
+                  <li
+                    role="presentation"
+                    id="pill-sell-item"
                   >
-                    Selld
-                  </button>
-                </li>
-                <li className="nav-item" role="presentation">
-                  <button
-                    className="nav-link"
-                    id="pills-auction-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-auction"
-                    type="button"
-                    role="tab"
-                    aria-controls="pills-auction"
-                    aria-selected="false"
-                    style={{ height: "61px" }}
-                  >
-                    Auctiond
-                  </button>
-                </li>
+                    <h4>Sell</h4>
+                  </li>
+                </button>
+                <button
+                  onClick={() => isstate(0)}
+                  className="col-6 d-flex py-auto justify-content-center border-0 border-start border-black border-1 align-items-center"
+                  id="pills-auction-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-auction"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-auction"
+                  aria-selected="false"
+                  style={{
+                    height: "61px",
+                    transition: "0.5s"
+                  }}
+                >
+                  <li className="" role="presentation">
+                    <h4>Auction</h4>
+
+                  </li>
+                </button>
               </ul>
               <div className="tab-content" id="pills-tabContent">
                 <div
@@ -821,7 +808,7 @@ function SideNav() {
             </div>
           </div>
         </div>
-      </div>
+      </div >
 
       <Circle
         image="https://cdn-icons-png.flaticon.com/512/6633/6633232.png"
@@ -902,7 +889,7 @@ function SideNav() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
