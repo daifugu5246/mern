@@ -10,6 +10,10 @@ import Market from './pages/Market'
 import Artwork from './pages/Artwork'
 import Trend from './pages/Trend'
 
+//Imported by WoraPhet
+import TestLoginModal from './pages/TestLoginModal'
+import AuctionDetail from './pages/AuctionDetail'
+
 //Import navigation bar and side navigation bar
 import Navigation from './navigation'
 import SideNav from './sideNav'
@@ -49,7 +53,16 @@ const router = createBrowserRouter([
   {
     path: '/trend',
     element: <Trend />
-  }]
+  },
+  {
+    path: '/TestLoginModal',
+    element: <TestLoginModal />
+  },
+  {
+    path: '/AuctionDetail',
+    element: <AuctionDetail />
+  }
+]
 )
 
 ReactDOM.createRoot(document.getElementById('root')).render(

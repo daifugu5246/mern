@@ -31,6 +31,10 @@ Before start Frontend of project, you need to setup npm
 
 # npm i bootstrap-icons
 
+Added by WoraPhet
+# npm install react-icons --save
+(สำหรับ icon บางตัว)
+
 4. To start frontend use this command
 
 # npm run dev
