@@ -41,7 +41,7 @@ body {
 }
 
 input.nosubmit {
-    width: 25vw;
+    width: 45vw;
     border: 1px solid #555;
     display: block;
     padding: 9px 4px 9px 40px;
@@ -64,7 +64,10 @@ input.nosubmit {
     border-radius: 35px;
 }
 
-
+#Artwork:hover {
+    transition: 0.2s;
+    background-color: #FCD3B4;
+}
 /* ---------------------------------- */
 
 
@@ -78,14 +81,13 @@ input.nosubmit {
 
 }
 
-#bgCircle {
+.bgCircle {
     background-color: #ffeee1;
     overflow: hidden;
 }
 
 #AlertNav {
     background-color: #fec3b4;
-    rotate: -90deg;
 }
 
 #bgWeb::-webkit-scrollbar {

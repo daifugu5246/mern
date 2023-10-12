@@ -14,7 +14,7 @@ const bidArtSchema = mongoose.Schema({
     //tag for search images
     tag: {
         type: String,
-        required: true,
+        default: '',
     },
     //description of the image
     description: {
@@ -46,8 +46,8 @@ const bidArtSchema = mongoose.Schema({
     current_price:{
         type: Number,
         default: function() {
-            return this.start_price;
-        }
+            return this.start_price ;
+        },
     },
     //number increment the price
     increment:{
@@ -73,7 +73,7 @@ const bidArtSchema = mongoose.Schema({
     //time created for bid
     timestamp: {
         type: Date,
-        default: Date.now,
+        default: Date.now() + 7 * 3600 * 1000,
     },
     //optional
     expired:{

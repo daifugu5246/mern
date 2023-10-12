@@ -12,18 +12,23 @@ const notiSchema = mongoose.Schema({
         ref: 'User',
         default: [],
     }],
-    text: {
+    notiType: {
         type: String,
+        enum: ['CLOSED', 'WINNER'],
         required: true,
     },
     //time created for notification
     timestamp: {
         type: Date,
-        default: Date.now,
+        default: Date.now() + 7  * 3600 * 1000,
     },
     //optional
     expired:{
         type: Date,
-        default: Date.now + 604800000,
+        default: function() {
+            this.timestamp + 604800000
+        },
     }
 });
+
+module.exports = mongoose.model('Notifications', notiSchema);
