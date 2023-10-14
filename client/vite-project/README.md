@@ -31,6 +31,8 @@ Before start Frontend of project, you need to setup npm
 
 # npm i bootstrap-icons
 
+# npm install react-icons --save
+
 4. To start frontend use this command
 
 # npm run dev

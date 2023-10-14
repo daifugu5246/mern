@@ -68,6 +68,210 @@ input.nosubmit {
     transition: 0.2s;
     background-color: #FCD3B4;
 }
+
+/* ---------------------------------- */
+/* Customization by WoraPhet*/
+#LoginButton.btn {
+    background-color: #FF9C7D;
+    color: black;
+    Border-color: black;
+    Border-radius: 3rem;
+}
+
+#LoginButton.btn:hover {
+    background-color: #F3C4BE;
+    color: black;
+    Border-color: black;
+    Border-radius: 3rem;
+}
+
+#LoginModal {
+    Border-radius: 3rem;
+    background-color: #FFEEE1;
+}
+
+#roundedModal {
+    Border-radius: 3rem;
+}
+
+#AuctionDetail_card {
+    background-color: #FBCAC482;
+    border-width: 0;
+    Border-radius: 1.5rem;
+}
+
+#AuctionDetail_Live {
+    background-color: #FFEBEA;
+}
+
+.liveBlink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    25% {
+        opacity: 50%;
+    }
+}
+
+#History {
+    max-height: 11rem;
+}
+
+.History_Bid {
+    background: #F5CDC2;
+}
+
+
+#AuctionDetail_End {
+    color: #A28684;
+    background: #CAAAA8;
+}
+
+#AuctionDetail_End span {
+    color: #674F4F;
+}
+
+#artistLabel {
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(180deg, rgba(70, 52, 52, 0.67) 0%, rgba(70, 52, 52, 0) 14.18%);
+    /* filter: drop-shadow(0px 0px 0px #000000); */
+}
+
+#solded {
+    aspect-ratio: 1 / 1;
+    width: 60%;
+    border-radius: 50%;
+    /* -moz-border-radius: 50%; */
+    /* -webkit-border-radius: 50%; */
+}
+
+.switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    overflow: hidden;
+}
+
+.switch-field label {
+    background: #FFEEE1;
+    border: 3px solid #0F0C0C;
+    box-shadow: 3px 4px 0px #0F0C0C;
+    border-radius: 45px;
+}
+
+.switch-field label:hover {
+    cursor: pointer;
+}
+
+.switch-field input:checked+label {
+    color: #F9E3E0;
+    background: #CF594D;
+    border: 3px solid #0F0C0C;
+    box-shadow: 3px 4px 0px #0F0C0C;
+    border-radius: 45px;
+}
+
+.tag_link a:link {
+    color: #CF594D;
+    text-decoration: none;
+}
+
+.tag_link a:visited {
+    color: #CF594D;
+    text-decoration: none;
+}
+
+.tag_link a:hover {
+    color: #CF594D;
+    text-decoration: underline;
+}
+
+.tag_link a:active {
+    color: #CF594D;
+    text-decoration: underline;
+}
+
+#CurrentBid {
+    background: linear-gradient(180deg, #F2BCB2 0%, #F2BCB2 100%);
+}
+
+#CurrentBid_UserName {
+    color: #CF594D;
+}
+
+#FinalPrice {
+    background: #CAAAA8;
+
+}
+
+#TheWinner {
+    background: linear-gradient(90deg, #F08D80 0%, #FCB8A7 100%);
+}
+
+#Place_Btn {
+    background: linear-gradient(to left, #F5C6F7 14.58%, #FF9C7D 91.67%);
+    box-shadow: 3px 4px 0px #0F0C0C;
+}
+
+#Place_Modal.modal {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#Place_Modal_Content.modal-content {
+    background: linear-gradient(to bottom, #FDE4D0 67.71%, #F8BFBE 100%);
+}
+
+#Place_Modal_Body {
+    /* Rectangle 88 */
+    background: #FFF5F9;
+    box-shadow: 3px 4px 0px #0F0C0C;
+}
+
+#typeBidNumber {
+    background: #E3DADD;
+}
+
+#typeBidNumber::-webkit-outer-spin-button,
+#typeBidNumber::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#flip-img {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+
+.gradient-custom-2 {
+    Border-radius: 3rem;
+    /* fallback for old browsers */
+    background: #FF9C7D;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #FFEEE1, #fccb90, #FF9C7D);
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #FFEEE1, #fccb90, #FF9C7D);
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .gradient-custom-2 {
+        border-top-right-radius: 0.3rem;
+        border-bottom-right-radius: 0.3rem;
+    }
+}
+
+
 /* ---------------------------------- */
 
 

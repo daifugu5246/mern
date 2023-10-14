@@ -10,6 +10,9 @@ import Profile from './pages/Profile'
 import Market from './pages/Market'
 import Artwork from './pages/Artwork'
 import Trend from './pages/Trend'
+//Imported by WoraPhet
+import TestLoginModal from './pages/TestLoginModal'
+import AuctionDetail from './pages/AuctionDetail'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
@@ -30,6 +33,8 @@ function App() {
           <Route path="/auction" element={<Market />} />
           <Route path="/artwork" element={<Artwork />} />
           <Route path="/trend" element={<Trend />} />
+          <Route path="/TestLoginModal" element={<TestLoginModal />} />
+          <Route path="/AuctionDetail" element={<AuctionDetail />} />
         </Routes>
       </div>
     </div>

@@ -6,6 +6,8 @@ import basket from './assets/wicker-basket.png'
 import { useLoginContext } from './context/loginContext'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+import TestLoginModal from './pages/TestLoginModal'
+
 axios.defaults.baseURL = 'http://localhost:5000'
 
 function NotLogin() {
@@ -22,8 +24,8 @@ function NotLogin() {
                     <h3>MasterPeach</h3>
                 </Link>
 
-                <div className='position-absolute end-0'>
-                    <Link to="/"><button className='btn'><h5>Login</h5></button></Link>
+                <div className='position-absolute end-0 d-flex'>
+                    <TestLoginModal />
                     <button className='btn' onClick={() => test()}><h5 className='px-2 py-1 pb-2 rounded-pill' style={{ backgroundColor: "lightgray" }}>Register</h5></button>
                 </div>
 

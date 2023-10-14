@@ -35,7 +35,11 @@ const Login = () => {
     }
     return (
         <>
-            <Helmet>
+
+        </>
+    )
+}
+/**            <Helmet>
                 <title>Login | YourColor</title>
             </Helmet>
             <h1>Login Page</h1>
@@ -50,9 +54,5 @@ const Login = () => {
                     <button type='submit' id='login'>Login</button>
                     <a href='/register'>Don't have account?</a>
                 </fieldset>
-            </form>
-        </>
-    )
-}
-
+            </form> */
 export default Login
