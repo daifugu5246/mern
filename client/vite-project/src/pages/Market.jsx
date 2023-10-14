@@ -4,6 +4,7 @@ import auction from '../assets/auction.png'
 import leaf from '../assets/tea-leaf.png'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useAuctionRoomContext } from '../context/auctionRoomContext'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 let pictureAuction = [
@@ -16,8 +17,13 @@ const pictureSelling = [
     { id: 4, picture: "Test", alt: "pic4", price: "100" }
 ]
 function Auction(data) {
-    console.log(pictureAuction)
+    const navigate = useNavigate()
+    const { isEnterAuctionRoom, enterAuctionRoom } = useAuctionRoomContext()
 
+    const handleToAuctionRoom = (id) => {
+        enterAuctionRoom(id)
+        navigate("/AuctionDetail")
+    }
     useEffect(() => {
 
     })
@@ -25,12 +31,12 @@ function Auction(data) {
         <div id="AuctionPage" >
             <div className='row mt-4' >
                 {pictureAuction.map((picture, index) => {
-
                     return (
-                        <div key={index} className='col-3 mb-3'>
+
+                        <div key={index} className='col-3 mb-3' onClick={() => handleToAuctionRoom(picture._id)}>
                             <div className='ShadowObj rounded' style={{ minHeight: "322px" }}>
-                                <img style={{ borderRadius: 5, height: "240px", width: "293px", objectFit: "cover" }} loading='lazy' className='' src={"data:image/jpeg;base64," + picture.image} alt={picture.title} />
-                                <div style={{ minHeight: "82px" }} className='border-top border-5 border-dark d-flex align-items-center justify-content-center'>
+                                <img style={{ height: "240px", width: "293px", objectFit: "cover" }} loading='lazy' className='' src={"data:image/jpeg;base64," + picture.image} alt={picture.title} />
+                                <div style={{ minHeight: "82px", borderTop: "3.5px solid #0F0C0C" }} className='d-flex align-items-center justify-content-center'>
                                     <img style={{ maxWidth: "30px" }} className='img-fluid me-2 mb-2' src={leaf} />
                                     <h4 className='fw-bold'>{picture.current_price}</h4>
                                 </div>

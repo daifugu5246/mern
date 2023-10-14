@@ -57,9 +57,9 @@ input.nosubmit {
 /* Side Navigation bar customization */
 
 #SideNavbar {
-    border: solid 2px black;
+    border: solid 2px #0F0C0C;
     background-color: #FD997F;
-    box-shadow: 2px 2px black;
+    box-shadow: 2px 2px #0F0C0C;
     width: fit-content;
     border-radius: 35px;
 }
@@ -73,15 +73,15 @@ input.nosubmit {
 /* Customization by WoraPhet*/
 #LoginButton.btn {
     background-color: #FF9C7D;
-    color: black;
-    Border-color: black;
+    color: #0F0C0C;
+    Border-color: #0F0C0C;
     Border-radius: 3rem;
 }
 
 #LoginButton.btn:hover {
     background-color: #F3C4BE;
-    color: black;
-    Border-color: black;
+    color: #0F0C0C;
+    Border-color: #0F0C0C;
     Border-radius: 3rem;
 }
 
@@ -317,9 +317,9 @@ input.nosubmit {
 /* Market customization */
 
 .ShadowObj {
-    border: solid 2px black;
+    border: solid 2px #0F0C0C;
     background-color: #FD997F;
-    box-shadow: 2px 2px black;
+    box-shadow: 2px 2px #0F0C0C;
     border-radius: 35px;
 }
 

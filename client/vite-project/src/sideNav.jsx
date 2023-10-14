@@ -62,6 +62,10 @@ function ModalArtwork() {
   const [enddate, setenddate] = useState("")
 
 
+  const handleSubmit = (e) => {
+
+  }
+
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -84,12 +88,12 @@ function ModalArtwork() {
       sell.style.backgroundColor = "#CF594D";
       sell.style.color = "white";
       auction.style.backgroundColor = "#FFD7B9";
-      auction.style.color = "black";
+      auction.style.color = "#0F0C0C";
 
     }
     else {
       sell.style.backgroundColor = "#FFD7B9";
-      sell.style.color = "black";
+      sell.style.color = "#0F0C0C";
       auction.style.backgroundColor = "#CF594D";
       auction.style.color = "white";
 
@@ -151,7 +155,7 @@ function ModalArtwork() {
               </button>
               <button
                 onClick={() => isstate(0)}
-                className="col-6 d-flex py-auto justify-content-center border-0 border-start border-black border-1 align-items-center"
+                className="col-6 d-flex py-auto justify-content-center border-0 border-start border-#0F0C0C border-1 align-items-center"
                 id="pills-auction-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-auction"
@@ -778,31 +782,31 @@ function ModalArtwork() {
                     }}
                   ></hr>
                 </div>
+                <div className="modal-footer-centered" style={{ height: "70px" }}>
+                  <div className="text-center ">
+                    <button
+                      type="button"
+                      className="btn"
+                      onClick={handleSubmit}
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to left, #F5C6F7 , #FF9C7D )",
+                        border: "solid 2px #0F0C0C",
+                        boxShadow: "2px 2px #0F0C0C",
+                        borderRadius: "45px",
+                        width: "100px",
+                        marginTop: "8px",
+                      }}
+                    >
+                      Publish
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="modal-footer-centered" style={{ height: "70px" }}>
-            <div className="text-center ">
-              <button
-                type="button"
-                className="btn"
-                data-bs-toggle="modal"
-                data-bs-target="#noti"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to left, #F5C6F7 , #FF9C7D )",
-                  border: "solid 2px black",
-                  boxShadow: "2px 2px black",
-                  borderRadius: "45px",
-                  width: "100px",
-                  marginTop: "8px",
-                }}
-              >
-                Publish
-              </button>
-            </div>
-          </div>
+
         </div>
       </div>
     </div >

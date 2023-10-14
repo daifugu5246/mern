@@ -12,9 +12,9 @@ setInterval(() => {
             const s = new Date(doc.start_at).getTime();
             const e = new Date(doc.end_at).getTime();
             if (doc.status == 'END') {
-                
+
             }
-            else if (now >= e){
+            else if (now >= e) {
                 doc.status = 'END';
                 //จบแล้วก็สร้าง Notification 2 อัน
                 Notification.insertMany([
@@ -22,7 +22,7 @@ setInterval(() => {
                         image_id: doc.image_id,
                         user_id: doc.user_id,
                         notiType: 'CLOSED',
-    
+
                     },
                     {
                         image_id: doc.image_id,
@@ -34,7 +34,7 @@ setInterval(() => {
                 }).catch((err) => {
                     console.log('Error:', err);
                 })
-            } 
+            }
             else if (now >= s) {
                 doc.status = 'LIVE';
             }
@@ -45,12 +45,12 @@ setInterval(() => {
             doc.save();
         });
     });
-},3000);
+}, 3000);
 
-/*seller api*/ 
+/*seller api*/
 
 //[finish] ส่งข้อมูลรูปภาพที่จะลงประมูลเข้า database
-router.post('/auction-publish', (req,res) => {
+router.post('/auction-publish', (req, res) => {
     const data = req.body;
     BidArt.create({
         image: data.image,
@@ -66,83 +66,84 @@ router.post('/auction-publish', (req,res) => {
     }).then(() => {
         res.status(201).send("Auction publish successfully");
     }).catch((err) => {
-        console.error("Error publish fail \n",err);
-        res.status(500).send("Error  publish fail \n",err);
+        console.error("Error publish fail \n", err);
+        res.status(500).send("Error  publish fail \n", err);
     })
 });
-router.post('/sell-publish',(req,res) => {
+router.post('/sell-publish', (req, res) => {
     res.send('ยังไม่ได้ทำค้าบบบบ');
 });
 
 /*buyer api*/
 
 //[finish] ดึงรูปประมูลทั้งหมด และเรียงตามเวลาที่ลงจากน้อยไปมาก
-router.get('/', (req,res) =>{
+router.get('/', (req, res) => {
     BidArt.find({})
-    .sort({date: 'desc'})
-    .then((data) => res.status(200).json(data))
-    .catch((err) => res.status(500).send("Error find images failed" + err));
+        .sort({ date: 'desc' }).lean()
+        .then((data) => res.status(200).json(data))
+        .catch((err) => res.status(500).send("Error find images failed" + err));
 });
 
 //[finish] ข้อมูลของรูปเดี่ยวๆเมื่อคลิดกเข้าไปดูห้องประมูล
-router.get('/:img_id', (req,res) => {
-     BidArt.findOne({_id: req.params.img_id})
-     .then((data) => {
-        res.status(200).json(data)
-    }).catch((err) => res.status(500).send("Error find image failed" + err));
+router.get('/:img_id', (req, res) => {
+    BidArt.findOne({ _id: req.params.img_id })
+        .then((data) => {
+            res.status(200).json(data)
+        }).catch((err) => res.status(500).send("Error find image failed" + err));
 });
 
 //[finish] อัพเดตค่า status ,current_price ให้กับ fornt-end จะเรียกใช้เมื่อต้องการเปลี่ยนสถานะ
-router.get('/:img_id/update', (req,res) => {
+router.get('/:img_id/update', (req, res) => {
     BidArt.findById(req.params.img_id).exec()
-    .then((data) => {
-        const now = Date.now() + 7 * 3600 * 1000;//set to Asia/Bangkok
-        const s = new Date(data.start_at).getTime();
-        const e = new Date(data.end_at).getTime();
-        //กรณีจบการประมูลแล้ว
-        if (data.status == 'END'){
+        .then((data) => {
+            const now = Date.now() + 7 * 3600 * 1000;//set to Asia/Bangkok
+            const s = new Date(data.start_at).getTime();
+            const e = new Date(data.end_at).getTime();
+            //กรณีจบการประมูลแล้ว
+            if (data.status == 'END') {
 
-        }
-        else if (now >= e){
-            data.status = 'END';
-        }
-        //กรณีถึงเวลาประมูล
-        else if (now >= s) {
-            data.status = 'LIVE';
-        }
-        //กรณียังไม่ถึงเวลาประมูล
-        else if (now < s) {
-            data.status = 'WAITING';
-        }
-        data.save();
-        res.status(200).json({
-            status: data.status,
-            current_price: data.current_price,
-            owner_id: data.owner_id
-        })})
-     .catch((err) => res.status(500).send("Error: " + err));  
+            }
+            else if (now >= e) {
+                data.status = 'END';
+            }
+            //กรณีถึงเวลาประมูล
+            else if (now >= s) {
+                data.status = 'LIVE';
+            }
+            //กรณียังไม่ถึงเวลาประมูล
+            else if (now < s) {
+                data.status = 'WAITING';
+            }
+            data.save();
+            res.status(200).json({
+                status: data.status,
+                current_price: data.current_price,
+                owner_id: data.owner_id
+            })
+        })
+        .catch((err) => res.status(500).send("Error: " + err));
 });
 //[finish] รับค่าที่ bid -> validate -> patch ค่าลง database
-router.patch('/:img_id/bid-confirm', (req,res) => {
+router.patch('/:img_id/bid-confirm', (req, res) => {
     BidArt.findById(req.params.img_id)
-    .then((data) => {
-        if(data.status == 'END') {
-            throw new Error("Error the auction is ended!")
-        }
-        if (req.body.bid_value < data.current_price + data.increment){
-            throw new Error(`Invalid value: bid value must >= ${data.current_price + data.increment}!`);
-        }
-        data.current_price = req.body.bid_value;
-        if (!data.attendance_id.includes(req.body.user_id)){
-            data.attendance_id.push(req.body.user_id);
-        }
-        data.owner_id = req.body.user_id;
-        data.save();
-        Users.findById(req.body.user_id).then((data) => res.status(202).send(`Bid by ${data.username} Accepted.`));
-        res.status(200).json({
-            current_price: data.current_price,
-        });
-    }).catch((err) => res.status(500).send("Error:" + err));
+        .then((data) => {
+            if (data.status == 'END') {
+                throw new Error("Error the auction is ended!")
+            }
+            if (req.body.bid_value < data.current_price + data.increment) {
+                throw new Error(`Invalid value: bid value must >= ${data.current_price + data.increment}!`);
+            }
+            data.current_price = req.body.bid_value;
+            if (!data.attendance_id.includes(req.body.user_id)) {
+                data.attendance_id.push(req.body.user_id);
+            }
+            data.owner_id = req.body.user_id;
+            data.save();
+            Users.findById(req.body.user_id).then((data) => res.status(202).send(`Bid by ${data.username} Accepted.`));
+            res.status(200).json({
+                current_price: data.current_price,
+            });
+        }).catch((err) => res.status(500).send("Error:" + err));
 });
 
 module.exports = router;
