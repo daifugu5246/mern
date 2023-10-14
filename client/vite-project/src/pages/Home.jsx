@@ -9,7 +9,7 @@ axios.defaults.baseURL = 'http://localhost:5000'
 const Home = () => {
     const { username } = useParams()
     const [userInfo, setUserInfo] = useState()
-    const { isLoggedin, login, logout } = useLoginContext()
+    const { isLoggedin } = useLoginContext()
     const navigate = useNavigate()
     useEffect(() => {
         if (isLoggedin) {

@@ -5,8 +5,8 @@ import question from "./assets/question.png";
 import axios from "axios";
 import { useLoginContext } from "./context/loginContext";
 import { Link, useNavigate } from "react-router-dom";
-
 axios.defaults.baseURL = "http://localhost:5000";
+
 
 
 function Circle(data) {
@@ -53,6 +53,8 @@ function ModalArtwork() {
   const [width, setwidth] = useState("25px")
 
 
+  const [base64Image, setBase64Image] = useState("");
+
   const [title, settitle] = useState("")
   const [tag, settag] = useState("")
   const [desc, setdesc] = useState("")
@@ -63,11 +65,29 @@ function ModalArtwork() {
 
 
   const handleSubmit = (e) => {
+    console.log(base64Image)
 
   }
 
-
   const onImageChange = (event) => {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      let base64String = e.target.result;
+
+      const i = true
+      while (i) {
+        if (base64String[0] == ",") {
+          base64String = base64String.substring(1)
+          break
+        }
+
+        else base64String = base64String.substring(1)
+      } setBase64Image(base64String);
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+
     if (event.target.files && event.target.files[0]) {
       setwidth("415px")
       setImage(URL.createObjectURL(event.target.files[0]));
@@ -441,7 +461,7 @@ function ModalArtwork() {
                 aria-labelledby="pills-auction-tab"
               >
 
-                <input id="getimage" type="file" className="filetype d-none " accept=".png, .jpeg" onChange={onImageChange} />
+                <input id="getimage" type="file" value="" className="filetype d-none " accept=".png, .jpeg" onChange={onImageChange} />
                 <button
                   onClick={() => inputImage()}
                   className="uploadPicButton"

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import TimeRemaining from "../components/TimeRemaining";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+
 
 import { GoDotFill } from "react-icons/go";
 import tea_leaf from '../assets/png-masterpeach/Icon/tea-leaf.png'
@@ -14,6 +13,8 @@ import peachSad from '../assets/png-masterpeach/Icon/peach-sad.png'
 import ProfileId from '../assets/png-masterpeach/digital art pic/1.jpg'
 import artId from '../assets/png-masterpeach/digital art pic/Artist 4/1.jpg'
 
+import { useAuctionRoomContext } from '../context/auctionRoomContext'
+import axios from 'axios';
 
 function SoldOut() {
   return (
@@ -353,6 +354,10 @@ function PlaceBack() {
 
 
 function AuctionDetail() {
+  const { isEnterAuctionRoom } = useAuctionRoomContext()
+
+
+
   const [sold, setSold] = useState(null);
   const [activeLive, setActiveLive] = useState(<Lived />);
   const [activeComponent, setActiveComponent] = useState(<Description />);
@@ -378,6 +383,11 @@ function AuctionDetail() {
   };
 
   useEffect(() => {
+
+    axios.get("/auction/" + isEnterAuctionRoom)
+      .then((response) => {
+        console.log(response.data)
+      })
     // Call handleAuction
     const setEvent = 1; // Replace with your condition true or fales
 
@@ -387,6 +397,7 @@ function AuctionDetail() {
     else {
       handleAuction(2);
     }
+
   }, []); // Empty dependency array means this effect only runs once after the initial render
 
   const handleButtonClick = (button) => {

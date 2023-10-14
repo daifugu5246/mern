@@ -9,8 +9,8 @@ axios.defaults.baseURL = 'http://localhost:5000'
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [errorText, setErrorText] = useState('')
-    const { isLoggedin, login } = useLoginContext()
+    const [setErrorText] = useState('')
+    const { login } = useLoginContext()
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()

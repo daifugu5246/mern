@@ -16,9 +16,9 @@ const pictureSelling = [
     { id: 3, picture: "Test", alt: "pic3", price: "100" },
     { id: 4, picture: "Test", alt: "pic4", price: "100" }
 ]
-function Auction(data) {
+function Auction() {
     const navigate = useNavigate()
-    const { isEnterAuctionRoom, enterAuctionRoom } = useAuctionRoomContext()
+    const { enterAuctionRoom } = useAuctionRoomContext()
 
     const handleToAuctionRoom = (id) => {
         enterAuctionRoom(id)
