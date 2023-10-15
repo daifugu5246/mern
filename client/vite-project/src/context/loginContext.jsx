@@ -1,20 +1,20 @@
 import { createContext, useContext, useState } from "react";
 
-const LoginContext = createContext(false)
+const LoginContext = createContext({ id: '', username: '', name: '', leaf: -1, peach: -1, auth: false })
 
 const useLoginContext = () => {
     return useContext(LoginContext)
 }
 
 const LoginContextProvider = ({ children }) => {
-    const [isLoggedin, setIsLoggedin] = useState(false)
+    const [isLoggedin, setisLoggedin] = useState({ id: '', username: '', name: '', leaf: -1, peach: -1, auth: false })
 
-    const login = () => {
-        setIsLoggedin(true)
+    const login = (id, username, name, leaf, peach) => {
+        setisLoggedin((isLoggedin) => ({ id: id, username: username, name: name, leaf: leaf, peach: peach, auth: true }))
     }
 
     const logout = () => {
-        setIsLoggedin(false)
+        setisLoggedin((isLoggedin) => ({ id: '', username: '', name: '', leaf: -1, peach: -1, auth: false }))
     }
 
     return (

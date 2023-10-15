@@ -11,12 +11,17 @@ import Market from "./pages/Market";
 import Artwork from "./pages/Artwork";
 import Trend from "./pages/Trend";
 
+//Imported by WoraPhet
+import TestLoginModal from './pages/TestLoginModal'
+import AuctionDetail from './pages/AuctionDetail'
+
 //Import navigation bar and side navigation bar
 import Navigation from "./navigation";
 import SideNav from "./sideNav";
 
 import { BrowserRouter, createBrowserRouter } from "react-router-dom";
 import { LoginContextProvider } from "./context/loginContext";
+import { AuctionRoomContextProvider } from "./context/auctionRoomContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle";
@@ -67,7 +72,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <div className="col-1 d-flex align-items-center">
               <SideNav />
             </div>
-            <App />
+            <AuctionRoomContextProvider>
+              <App />
+            </AuctionRoomContextProvider>
+
           </div>
         </div>
       </LoginContextProvider>

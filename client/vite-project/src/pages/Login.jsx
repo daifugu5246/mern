@@ -9,9 +9,8 @@ axios.defaults.baseURL = 'http://localhost:5000'
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [errorText, setErrorText] = useState('')
-    const { isLoggedin, login } = useLoginContext()
-    console.log(isLoggedin)
+    const [setErrorText] = useState('')
+    const { login } = useLoginContext()
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -21,8 +20,9 @@ const Login = () => {
         }).then((response) => {
             console.log(response.status)
             if (response.status === 200) {
-                login()
-                navigate(`/home/${username}`);
+                console.log(response.data.uid, response.data.username, response.data.name, response.data.leaf, response.data.peach)
+                login(response.data.uid, response.data.username, response.data.name, response.data.leaf, response.data.peach)
+                navigate('/auction');
             }
             else {
                 setErrorText(response.data)
@@ -35,7 +35,11 @@ const Login = () => {
     }
     return (
         <>
-            <Helmet>
+
+        </>
+    )
+}
+/**            <Helmet>
                 <title>Login | YourColor</title>
             </Helmet>
             <h1>Login Page</h1>
@@ -50,9 +54,5 @@ const Login = () => {
                     <button type='submit' id='login'>Login</button>
                     <a href='/register'>Don't have account?</a>
                 </fieldset>
-            </form>
-        </>
-    )
-}
-
+            </form> */
 export default Login
