@@ -100,8 +100,7 @@ export default function Profile() {
                                 <img className='img-fluid' src={topup} alt="add icon"style={{width:"1rem", marginLeft:"8px"}}/>
                             </h6>
                         </div>
-                    </div>  
-                       
+                    </div>          
                 </div>
             
                 <div id="Picture" className='d-flex'
@@ -114,11 +113,11 @@ export default function Profile() {
                         }}
                         onMouseOver={(event)=>{
                             if (tabState != 0) {
-                                event.currentTarget.style.backgroundColor = "#CF594D";
+                                event.currentTarget.style.backgroundColor = "#F0988F";
                                 const icon = document.getElementById("Brush");
-                                icon.style.backgroundColor = "#FD997F";
+                                icon.style.backgroundColor = "#FFC5B6";
                                 const text = document.getElementById("tWA");
-                                text.style.color = "#F9E3E0";
+                                text.style.color = "#0F0C0C";
                             }
                         }}
                         onMouseLeave={(event) =>{
@@ -144,11 +143,11 @@ export default function Profile() {
                         }}
                         onMouseOver={(event)=>{
                             if (tabState != 1) {
-                                event.currentTarget.style.backgroundColor = "#CF594D";
+                                event.currentTarget.style.backgroundColor = "#F0988F";
                                 const icon = document.getElementById("Book");
-                                icon.style.backgroundColor = "#FD997F";
+                                icon.style.backgroundColor = "#FFC5B6";
                                 const text = document.getElementById("tC");
-                                text.style.color = "#F9E3E0";
+                                text.style.color = "#0F0C0C";
                             }
                         }}
                         onMouseLeave={(event) =>{
@@ -174,11 +173,11 @@ export default function Profile() {
                         }}
                         onMouseOver={(event)=>{
                             if (tabState != 2) {
-                                event.currentTarget.style.backgroundColor = "#CF594D";
+                                event.currentTarget.style.backgroundColor = "#F0988F";
                                 const icon = document.getElementById("hBid");
-                                icon.style.backgroundColor = "#FD997F";
+                                icon.style.backgroundColor ="#FFC5B6";
                                 const text = document.getElementById("tA");
-                                text.style.color = "#F9E3E0";
+                                text.style.color = "#0F0C0C";
                             }
                         }}
                         onMouseLeave={(event) =>{
