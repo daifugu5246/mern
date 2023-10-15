@@ -3,7 +3,6 @@ const User = require("../models/users.js");
 const Art_auction = require("../models/bidArt.js"); //art for collection&auction
 const Art_buy = require("../models/sellArt.js"); // art for collection
 const Art_sell = require("../models/sellArt.js"); // art for artwork
-const mongoose = require("mongoose");
 const router = express.Router();
 
 router.get("/:_id", (req, res) => {
@@ -17,9 +16,11 @@ router.get("/:_id", (req, res) => {
     });
 });
 
-// ต้องไปเช็ค user in owner id 
+// ต้องไปเช็ค user in owner id
 router.get("/:_id/artwork", (req, res) => {
   Art_sell.find({ _id: req.params._id })
+    .sort({ date: "desc" })
+    .lean()
     .then((data) => {
       res.json(data);
     })
@@ -40,7 +41,7 @@ router.get("/:_id/collection", (req, res) => {
 
 // art for auction
 router.get("/:_id/auction", (req, res) => {
-  Art_auction.find({ _id: req.params._id })
+  Art_auction.findById({ _id: req.params._id })
     .then((data) => {
       res.json(data); // just showing auction id
     })
