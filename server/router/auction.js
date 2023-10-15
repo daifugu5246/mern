@@ -128,10 +128,10 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
     BidArt.findById(req.params.img_id)
         .then((data) => {
             if (data.status == 'END') {
-                throw new Error("Error the auction is ended!")
+                throw new Error("This auction is now closed.")
             }
             if (req.body.bid_value < data.current_price + data.increment) {
-                throw new Error(`Invalid value: bid value must >= ${data.current_price + data.increment}!`);
+                throw new Error("Your bid is not the highest.");
             }
             data.current_price = req.body.bid_value;
             if (!data.attendance_id.includes(req.body.user_id)) {
