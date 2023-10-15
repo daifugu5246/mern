@@ -16,7 +16,7 @@ db_connect()
 
   .then(() => {
     app.use("/", generalRouter);
-    app.use("/auction", auctionRouter);
+    //app.use("/auction", auctionRouter);
     app.use("/profiles",generalProfile);
     app.listen(port, () => {
       console.log("The server listening on port " + port);
