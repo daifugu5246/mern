@@ -174,7 +174,7 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
                     //change leader
                     data.owners_id = req.body.user_id;
                     data.save();
-                    console.log(data.current_price, data.owners_id);
+                    //console.log(data.current_price, data.owners_id);
                     Users.findById(req.body.user_id).then((user) => {
                         user.leaf -= data.current_price;
                         user.save();
