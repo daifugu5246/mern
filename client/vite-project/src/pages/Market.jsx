@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useAuctionRoomContext } from '../context/auctionRoomContext'
 import { useLoginContext } from '../context/loginContext'
 import TestLoginModal from './TestLoginModal'
+import peach from '../assets/peach.png'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 let pictureAuction = [
@@ -36,7 +37,6 @@ function Auction() {
     }
 
     useEffect(() => {
-        document.getElementById("InvisibleLogin").style.display = "none"
         if (isEnterAuctionRoom == "" && id != null) {
             enterAuctionRoom(id)
             navigate("/auction/" + id)
@@ -44,7 +44,7 @@ function Auction() {
     }, [isLoggedin])
     return (
         <div id="AuctionPage" >
-            <div id="InvisibleLogin">
+            <div id="InvisibleLogin" style={{ display: "none" }}>
                 <TestLoginModal />
             </div>
 
@@ -167,17 +167,7 @@ export default function Market() {
         )
     }
     else {
-        return <div className='container'>
-            <header className='d-flex justify-content-center gap-5'>
-                <div id="Purchase" className='p-2 px-5 me-5 d-flex align-items-center ShadowObj' onClick={() => navigateTo("p")}>
-                    <img className='img-fluid me-3' src={purchase} alt="Auction Pic" style={{ maxWidth: "50px" }} />
-                    <h1 className=''>Purchase</h1>
-                </div>
-                <div id="Auction" className='p-2 px-5 me-5 d-flex align-items-center ShadowObj' onClick={() => navigateTo("a")}>
-                    <img className='img-fluid me-3' src={auction} alt="Auction Pic" style={{ maxWidth: "50px" }} />
-                    <h1>Auction</h1>
-                </div>
-            </header>
+        return <div className="position-absolute top-50 start-50 loader" style={{ backgroundImage: peach }}>
         </div>
     }
 }

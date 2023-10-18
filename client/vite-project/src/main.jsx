@@ -19,12 +19,15 @@ import AuctionDetail from './pages/AuctionDetail'
 import Navigation from "./navigation";
 import SideNav from "./sideNav";
 
+import logo from "./assets/logo2.png"
+
 import { BrowserRouter, createBrowserRouter } from "react-router-dom";
 import { LoginContextProvider } from "./context/loginContext";
 import { AuctionRoomContextProvider } from "./context/auctionRoomContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle";
+import { Helmet } from "react-helmet";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +69,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <BrowserRouter>
       <LoginContextProvider>
+        <Helmet>
+          <title>MasterPeach</title>
+          <link rel="icon" type="image/x-icon" href={logo}></link>
+        </Helmet>
         <Navigation />
         <div className="container-fluid">
           <div className="row">

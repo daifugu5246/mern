@@ -11,7 +11,6 @@ import peach from '../assets/png-masterpeach/Icon/peach (8).png'
 import peachSad from '../assets/png-masterpeach/Icon/peach-sad.png'
 
 import ProfileId from '../assets/png-masterpeach/digital art pic/1.jpg'
-import artId from '../assets/png-masterpeach/digital art pic/Artist 4/1.jpg'
 
 import { useAuctionRoomContext } from '../context/auctionRoomContext'
 import axios from 'axios';
@@ -204,7 +203,7 @@ function PlaceABid(data) {
   const [input, setinput] = useState();
   const [error, setError] = useState();
   const [st, setSt] = useState();
-  if (data.status == "ENDD" && st == null) {
+  if (data.status == "LIVE" && st == null) {
     setSt(1)
   } else if (data.status == "END" && st == null) {
     setSt(0)
@@ -427,6 +426,7 @@ function PlaceABid(data) {
 
 function PlaceBack(data) {
   const [activeModal, setActiveModal] = useState(null);
+  const navigate = useNavigate()
   const openModal = (modalType) => {
     setActiveModal(modalType);
   };
@@ -442,7 +442,7 @@ function PlaceBack(data) {
       <button onClick={() => openModal(1)} type="button" id="InvisibleButton" className="d-none btn border border-black border-2 rounded-5 text fw-medium px-5 py-2">
         Place a Bid
       </button>
-      <button type="button" id="Place_Btn" className="d-flex border border-black border-2 rounded-5 text fw-medium px-5 py-2 mx-auto mb-3">
+      <button type="button" id="Place_Btn" className="d-flex border border-black border-2 rounded-5 text fw-medium px-5 py-2 mx-auto mb-3" onClick={() => navigate("/auction")}>
         <span className="pe-2">
           Back
         </span>
@@ -478,7 +478,7 @@ function PlaceBack(data) {
 
 
 function Detail(data) {
-  const [id, setid] = useState(data.id);
+  const [id] = useState(data.id);
   const [event, setevent] = useState(1)
   const [sold, setSold] = useState(null);
   const [activeLive, setActiveLive] = useState(<Lived />);
@@ -678,9 +678,8 @@ export default function AuctionDetail() {
 
   if (loading) {
     return (
-      <div>
-        loading
-      </div>
+      <div className="position-absolute top-50 start-50 loader"></div>
+
     )
   } else if (!loading) {
     return <Detail id={id} />
