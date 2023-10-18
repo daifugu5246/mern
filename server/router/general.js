@@ -27,7 +27,7 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  console.log("Reagister by: ", req.body);
+  console.log("Register by: ", req.body);
   Users.findOne({
     username: req.body.username,
   }).then((user) => {

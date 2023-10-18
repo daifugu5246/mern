@@ -61,6 +61,7 @@ router.post('/auction-publish', (req, res) => {
         tag: data.tag,
         description: data.description,
         artist_id: data.artist_id,
+        owner_id: "",
         start_price: data.start_price,
         increment: data.increment,
         start_at: new Date(data.start_at),
