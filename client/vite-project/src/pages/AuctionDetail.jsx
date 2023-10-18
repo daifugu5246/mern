@@ -505,6 +505,7 @@ function Detail(data) {
     }
   };
   useEffect(() => {
+    console.log(id)
     /*if (id.status != "END") {
       setevent(state)
     }

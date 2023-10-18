@@ -1,10 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
-
 var state = 1;
-
+let check
 class TimeRemaining extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -21,6 +21,7 @@ class TimeRemaining extends React.Component {
         this.interval = setInterval(() => {
             const now = new Date().getTime();
             const timeRemaining = targetDate - now;
+            console.log(now)
             if (timeRemaining <= 0) {
                 clearInterval(this.interval);
                 state = 0;
@@ -41,8 +42,11 @@ class TimeRemaining extends React.Component {
     }
 
     render() {
+        if (check != this.props.endtime) {
+            check = this.props.endtime
+            state = 1
+        }
         const { days, hours, minutes, seconds } = this.state;
-
         return (
             <Container>
                 <Row>
