@@ -11,12 +11,13 @@ setInterval(() => {
             const now = new Date().getTime()//set to Asia/Bangkok
             const s = new Date(doc.start_at).getTime();
             const e = new Date(doc.end_at).getTime();
-            console.log(now, s, e);
+            //console.log(now, s, e);
             if (doc.status == 'END') {
 
             }
             else if (now > e) {
                 doc.status = 'END';
+                doc.save();
                 //จบแล้วก็สร้าง Notification 2 อัน
                 Notification.insertMany([
                     {
@@ -38,12 +39,13 @@ setInterval(() => {
             }
             else if (now >= s && now <= e && doc.status != 'LIVE') {
                 doc.status = 'LIVE';
+                doc.save();
             }
             //กรณียังไม่ถึงเวลาประมูล
             else if (now < s && doc.status != 'WAITING') {
                 doc.status = 'WAITING';
+                doc.save();
             }
-            doc.save();
         });
     });
 }, 3000);
@@ -146,8 +148,10 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             //find previous user
             Users.findById(data.owner_id).then((user) => {
                 //return leaf to previous user
-                user.leaf += data.current_price
-                user.save();
+                if(user != null){
+                    user.leaf = data.current_price
+                    user.save();
+                }
             });
             //change current price
             data.current_price = req.body.bid_value;
