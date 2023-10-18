@@ -149,9 +149,6 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             Users.findById(data.owner_id).then((user) => {
                 //return leaf to previous user
                 if (user != null) {
-
-                }
-                if (user != null) {
                     user.leaf = user.leaf + data.current_price
                     user.save();
                 }
