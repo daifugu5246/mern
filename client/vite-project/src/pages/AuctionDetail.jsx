@@ -198,7 +198,7 @@ function AuctionEnd() {
 }
 
 function PlaceABid(data) {
-  const { isLoggedin } = useLoginContext()
+  const { isLoggedin, login } = useLoginContext()
   const [activeModal, setActiveModal] = useState(null);
   const [input, setinput] = useState();
   const [error, setError] = useState();
@@ -230,12 +230,16 @@ function PlaceABid(data) {
       openModal(3);
     }
     else if (isLoggedin.leaf >= input) {
+      console.log("/auction/" + data.id + "/bid-confirm")
+      console.log(isLoggedin.id)
+      console.log(input)
       axios.patch("/auction/" + data.id + "/bid-confirm", {
         user_id: isLoggedin.id,
-        current_price: input,
+        bid_value: input
       }).then((response) => {
         if (response.status == 200) {
           console.log(response)
+          login(isLoggedin.id, isLoggedin.username, isLoggedin.name, isLoggedin.description, isLoggedin.leaf - input, isLoggedin.peach)
           openModal(2)
           navigate("/auction")
         } else {

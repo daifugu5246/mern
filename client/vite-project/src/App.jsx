@@ -25,10 +25,9 @@ function App() {
     <div className='col-11 px-4 pe-5'>
       <div id="bgWeb" className='my-4 p-4'>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home/:username" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:username" element={<Profile />} />
           <Route path="/purchase" element={<Market />} />
           <Route path="/auction" element={<Market />} />
           <Route path="/artwork" element={<Artwork />} />

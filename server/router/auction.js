@@ -148,7 +148,7 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             //find previous user
             Users.findById(data.owner_id).then((user) => {
                 //return leaf to previous user
-                if(user != null){
+                if (user != null) {
                     user.leaf = data.current_price
                 }
                 if (user != null) {
@@ -164,7 +164,7 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             Users.findById(req.body.user_id).then((user) => {
                 res.status(200).json({
                     leader: user.username,
-                    current_price: data.current_price,
+                    current_price: data.current_price
                 });
             });
         }).catch((err) => res.status(500).send("Error:" + err.message));

@@ -900,6 +900,7 @@ function SideNav() {
   const { isLoggedin } = useLoginContext()
   const [pagestate, setPagestate] = useState(pathnow)
   const navigate = useNavigate()
+  const [u, setUser] = useState("profile")
 
   const NavigatePath = (path) => {
     setPagestate(path)
@@ -907,9 +908,13 @@ function SideNav() {
   }
 
   useEffect(() => {
+
     const user = document.getElementById("profile")
     if (!isLoggedin.auth) user.style.display = "none"
-    else if (isLoggedin.auth) user.style.display = "block"
+    else if (isLoggedin.auth) {
+      user.style.display = "block"
+      setUser("profile/" + isLoggedin.id)
+    }
 
   }, [isLoggedin.auth]);
 
@@ -918,11 +923,11 @@ function SideNav() {
       id="SideNavbar"
       className="my-3 container  d-flex flex-column align-items-center justify-content-center p-3 py-4"
     >
-      <div onClick={() => NavigatePath("profile")}>
+      <div onClick={() => NavigatePath(u)}>
         <Circle
           image={person}
           title="User"
-          path="profile"
+          path={u}
           state={pagestate}
         />
       </div>
