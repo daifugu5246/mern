@@ -11,10 +11,11 @@ setInterval(() => {
             const now = new Date().getTime()//set to Asia/Bangkok
             const s = new Date(doc.start_at).getTime();
             const e = new Date(doc.end_at).getTime();
+            console.log(now, s, e);
             if (doc.status == 'END') {
 
             }
-            else if (now >= e) {
+            else if (now > e) {
                 doc.status = 'END';
                 //จบแล้วก็สร้าง Notification 2 อัน
                 Notification.insertMany([
@@ -35,7 +36,7 @@ setInterval(() => {
                     console.log('Error:', err);
                 })
             }
-            else if (now >= s) {
+            else if (now >= s && now <= e) {
                 doc.status = 'LIVE';
             }
             //กรณียังไม่ถึงเวลาประมูล
