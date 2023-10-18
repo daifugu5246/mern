@@ -60,8 +60,8 @@ router.post('/auction-publish', (req, res) => {
         artist_id: data.artist_id,
         start_price: data.start_price,
         increment: data.increment,
-        start_at: new Date(data.start_at),
-        end_at: new Date(data.end_at),
+        start_at: data.start_at,
+        end_at: data.end_at,
         status: 'WAITING',
     }).then(() => {
         res.status(201).send("Auction publish successfully");
