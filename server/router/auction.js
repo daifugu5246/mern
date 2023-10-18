@@ -8,7 +8,7 @@ const router = express.Router();
 setInterval(() => {
     BidArt.find({}).then((docs) => {
         docs.forEach((doc) => {
-            const now = Date().getTime()//set to Asia/Bangkok
+            const now = new Date().getTime()//set to Asia/Bangkok
             const s = new Date(doc.start_at).getTime();
             const e = new Date(doc.end_at).getTime();
             if (doc.status == 'END') {
