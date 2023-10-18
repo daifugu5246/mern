@@ -134,7 +134,15 @@ function History() {
 }
 
 function AuctionAvailable(data) {
-
+  const [username, setUsername] = useState()
+  axios.get('/auction/get-owners/' + data.owners_id, {
+  }).then((response) => {
+    console.log(response)
+    if (response.status == 200) setUsername(response.data.owners_username)
+    console.log(response.data.owners_username)
+  }).catch((error) => {
+    console.error(error)
+  })
   return (
     <div className="row justify-content-center text-center mx-3 my-2">
       <div id="CurrentBid" className="col bg-danger rounded-4 mx-2 py-2 px-4 mb-2">
@@ -149,7 +157,7 @@ function AuctionAvailable(data) {
           <img style={{ maxWidth: "1.25rem" }} className='img-fluid ' src={tea_leaf} />
 
           <div id="CurrentBid_UserName" className="text fw-medium text-nowrap">
-            by {data.owner_id}
+            by {username}
           </div>
         </div>
       </div>
@@ -506,7 +514,7 @@ function Detail(data) {
     if (status === 1) {
       setSold(null);
       setActiveLive(<Lived />);
-      setActiveAuction(<AuctionAvailable current={id.current_price} endtime={id.end_at} owner_id={id.owners_id} />);
+      setActiveAuction(<AuctionAvailable current={id.current_price} endtime={id.end_at} owners_id={id.owners_id} />);
       setActivePlaceABid(<PlaceABid id={id._id} increment={id.increment} current={id.current_price} leaf={200} status={id.status} start_price={id.start_price} />);
     }
 
