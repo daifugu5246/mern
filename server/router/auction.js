@@ -36,11 +36,11 @@ setInterval(() => {
                     console.log('Error:', err);
                 })
             }
-            else if (now >= s && now <= e) {
+            else if (now >= s && now <= e && doc.status != 'LIVE') {
                 doc.status = 'LIVE';
             }
             //กรณียังไม่ถึงเวลาประมูล
-            else if (now < s) {
+            else if (now < s && doc.status != 'WAITING') {
                 doc.status = 'WAITING';
             }
             doc.save();
