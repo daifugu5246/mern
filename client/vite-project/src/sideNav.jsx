@@ -102,8 +102,6 @@ function ModalArtwork() {
       }).then((response) => {
         if (response.status == 201) {
           console.log(response)
-          document.getElementById("invisibleclosemodal").click()
-          alert("Success create auction")
           setBase64Image()
           settitle()
           settag()
@@ -112,6 +110,9 @@ function ModalArtwork() {
           setminimum()
           setstartdate()
           setenddate()
+          document.getElementById("invisibleclosemodal").click()
+          alert("Success create auction")
+
 
         } else {
           console.log(response)
@@ -667,8 +668,8 @@ function ModalArtwork() {
                       value={desc}
                       onChange={(e) => setdesc(e.target.value)}
                       type="text"
-                      placeholder="Limit 150 letters"
-                      maxLength="150"
+                      placeholder="Limit 300 letters"
+                      maxLength="300"
                       required
                     ></textarea>
                   </div>

@@ -41,7 +41,7 @@ function Auction() {
             enterAuctionRoom(id)
             navigate("/auction/" + id)
         }
-    }, [isLoggedin])
+    }, [isLoggedin, pictureAuction])
     return (
         <div id="AuctionPage" >
             <div id="InvisibleLogin" style={{ display: "none" }}>
