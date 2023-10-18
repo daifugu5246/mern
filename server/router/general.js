@@ -34,7 +34,7 @@ router.post("/register", (req, res) => {
     if (user) {
       res.status(401).send("This username already exists");
     } else {
-      User.create({
+      Users.create({
         email: req.body.email,
         name: req.body.name,
         username: req.body.username,

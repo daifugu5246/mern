@@ -19,16 +19,9 @@ const notiSchema = mongoose.Schema({
     },
     //time created for notification
     timestamp: {
-        type: Date,
+        type: Number,
         default: Date.now() + 7  * 3600 * 1000,
     },
-    //optional
-    expired:{
-        type: Date,
-        default: function() {
-            this.timestamp + 604800000
-        },
-    }
 });
 
 module.exports = mongoose.model('Notifications', notiSchema);

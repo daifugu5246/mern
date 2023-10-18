@@ -46,7 +46,7 @@ const sellArtSchema = mongoose.Schema({
     },
     //time created for sale
     timestamp: {
-        type: Date,
+        type: Number,
         default: Date.now * 7 * 3600 * 1000,
     },
 });

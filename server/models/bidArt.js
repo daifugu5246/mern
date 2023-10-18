@@ -56,12 +56,12 @@ const bidArtSchema = mongoose.Schema({
     },
     //start time
     start_at:{
-        type: Date,//end time at 00.00
+        type: Number,//end time at 00.00
         required: true,
     },
     //end time
     end_at:{
-        type: Date,//end time at 23.59
+        type: Number,//end time at 23.59
         required: true,
     },
     //status of the image
@@ -72,14 +72,9 @@ const bidArtSchema = mongoose.Schema({
     },
     //time created for bid
     timestamp: {
-        type: Date,
+        type: Number,
         default: Date.now() + 7 * 3600 * 1000,
     },
-    //optional
-    expired:{
-        type: Date,
-        //default: Date.now + 604800000,
-    }
 });
 
 module.exports = mongoose.model('BidArt', bidArtSchema);
