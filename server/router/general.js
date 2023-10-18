@@ -14,13 +14,7 @@ router.post("/login", (req, res) => {
   })
     .then((user) => {
       if (user) {
-        res.status(200).json({
-          uid: user._id,
-          username: user.username,
-          name: user.name,
-          peach: user.peach,
-          leaf: user.leaf
-        });
+        res.status(200).json(user);
       } else {
         res.status(401).send("Invalid username or password");
       }
