@@ -154,29 +154,30 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             if (req.body.bid_value < data.current_price + data.increment) {
                 return res.status(400).json({ message: "Your bid is not the highest." });
             }
-            //find previous user
-            Users.findById(data.owners_id).then((user) => {
-                //return leaf to previous user
-                if (user != null) {
-                    user.leaf = user.leaf + data.current_price
-                    user.save();
+            if (req.body.user_id == data.artist_id) {
+                return res.status(400).json({ message: "This is your art!!!" });
+            }
+            BidArt.findOne({ owners_id: req.body.user_id}).then((art) => {
+                if (art != null && art._id != req.params.img_id) {
+                    return res.status(400).json({ message: "Your are in the other bidding." });
+                }else{
+                    //change current price
+                    data.current_price = req.body.bid_value;
+                    //change leader
+                    data.owners_id = req.body.user_id;
+                    data.save();
+                    console.log(data.current_price, data.owners_id);
+                    Users.findById(req.body.user_id).then((user) => {
+                        user.leaf -= data.current_price;
+                        user.save();
+                        res.status(200).json({
+                            leader: user.username,
+                            current_price: data.current_price,
+                            user_leaf: user.leaf
+                        });
+                    });
                 }
-            });
-            //change current price
-            data.current_price = req.body.bid_value;
-            //change leader
-            data.owners_id = req.body.user_id;
-            data.save();
-            console.log(data.current_price, data.owner_id);
-            Users.findById(req.body.user_id).then((user) => {
-                user.leaf -= data.current_price;
-                user.save();
-                res.status(200).json({
-                    leader: user.username,
-                    current_price: data.current_price,
-                    user_leaf: user.leaf
-                });
-            });
+            })
         }).catch((err) => res.status(500).send("Error:" + err.message));
 });
 
