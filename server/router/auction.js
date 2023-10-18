@@ -18,6 +18,11 @@ setInterval(() => {
             else if (now > e) {
                 doc.status = 'END';
                 doc.save();
+                Users.findById(doc.owner_id).then((user) => {
+                    if(user !=  null){
+                        user.leaf -= doc.current_price;
+                    }
+                });
                 //จบแล้วก็สร้าง Notification 2 อัน
                 Notification.insertMany([
                     {
