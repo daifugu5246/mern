@@ -105,7 +105,7 @@ router.get('/:img_id', (req, res) => {
         }).catch((err) => res.status(500).send("Error find image failed" + err));
 });
 
-router.get('/:owners_id', (req, res) => {
+router.get('get-owners/:owners_id', (req, res) => {
     Users.findOne({ _id: req.params.owners_id })
     .then((owners) => {
         res.status(200).json({
