@@ -102,6 +102,17 @@ function ModalArtwork() {
       }).then((response) => {
         if (response.status == 201) {
           console.log(response)
+          document.getElementById("invisibleclosemodal").click()
+          alert("Success create auction")
+          setBase64Image()
+          settitle()
+          settag()
+          setdesc()
+          setprice()
+          setminimum()
+          setstartdate()
+          setenddate()
+
         } else {
           console.log(response)
         }
@@ -186,7 +197,13 @@ function ModalArtwork() {
             padding: "0px",
           }}
         >
-
+          <button
+            id="invisibleclosemodal"
+            type="button"
+            className="btn-close d-none"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
           <div
             className="modal-body"
             style={{ margin: "0px", padding: "0px", maxWidth: "700px" }}

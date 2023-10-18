@@ -104,6 +104,7 @@ export default function Market() {
 
 
     function LoadPic() {
+        pictureAuction = []
         axios.get('/auction', {
 
         }).then((respond) => {
