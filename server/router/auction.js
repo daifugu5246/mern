@@ -128,7 +128,7 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
     BidArt.findById(req.params.img_id)
         .then((data) => {
             if (data.status == 'END') {
-                throw new Error("This auction is now closed.")
+                throw new Error("This auction is now closed.");
             }
             if (req.body.bid_value < data.current_price + data.increment) {
                 throw new Error("Your bid is not the highest.");
@@ -139,9 +139,12 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             }
             data.owner_id = req.body.user_id;
             data.save();
-            Users.findById(req.body.user_id).then((data) => res.status(202).send(`Bid by ${data.username} Accepted.`));
-            res.status(200).json({
-                current_price: data.current_price,
+            const current_price = data.current_price;
+            Users.findById(req.body.user_id).then((data) => {
+                res.status(200).json({
+                    leader: data.username,
+                    current_price: current_price,
+                });
             });
         }).catch((err) => res.status(500).send("Error:" + err));
 });
