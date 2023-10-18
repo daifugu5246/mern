@@ -105,7 +105,7 @@ router.get('/:img_id', (req, res) => {
         }).catch((err) => res.status(500).send("Error find image failed" + err));
 });
 
-router.get('get-owners/:owners_id', (req, res) => {
+router.get('/get-owners/:owners_id', (req, res) => {
     Users.findOne({ _id: req.params.owners_id })
     .then((owners) => {
         res.status(200).json({
@@ -170,6 +170,7 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             console.log(data.current_price, data.owner_id);
             Users.findById(req.body.user_id).then((user) => {
                 user.leaf -= data.current_price;
+                user.save();
                 res.status(200).json({
                     leader: user.username,
                     current_price: data.current_price,
