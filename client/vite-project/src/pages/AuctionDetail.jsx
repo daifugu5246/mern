@@ -138,7 +138,7 @@ function AuctionAvailable(data) {
   axios.get('/auction/get-owners/' + data.owners_id, {
   }).then((response) => {
     console.log(response)
-    if (response.status == 200) setUsername(response.data.owners_username)
+    if (response.status == 200) setUsername("by " + response.data.owners_username)
     console.log(response.data.owners_username)
   }).catch((error) => {
     console.error(error)
@@ -157,7 +157,7 @@ function AuctionAvailable(data) {
           <img style={{ maxWidth: "1.25rem" }} className='img-fluid ' src={tea_leaf} />
 
           <div id="CurrentBid_UserName" className="text fw-medium text-nowrap">
-            by {username}
+            {username}
           </div>
         </div>
       </div>
@@ -655,7 +655,7 @@ function Detail(data) {
 
                 {tag.map((t, index) => {
                   return (
-                    <a key={index} href={"/" + t}>{"#" + t}</a>
+                    <a key={index} href="#">{"#" + t}</a>
                   )
                 })}
               </div>
