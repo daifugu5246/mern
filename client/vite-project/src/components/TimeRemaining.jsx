@@ -17,9 +17,9 @@ class TimeRemaining extends React.Component {
 
     componentDidMount() {
         // Set the target date and time here
-        const targetDate = new Date(this.props.endtime) - (25200 * 1000)
+        const targetDate = new Date(this.props.endtime).getTime()
         this.interval = setInterval(() => {
-            const now = new Date();
+            const now = new Date().getTime();
             const timeRemaining = targetDate - now;
             if (timeRemaining <= 0) {
                 clearInterval(this.interval);

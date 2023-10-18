@@ -81,14 +81,16 @@ function ModalArtwork() {
     e.preventDefault()
     var start = new Date(startdate).getTime() - 25200 * 1000
     var end = new Date(enddate).getTime() - 25200 * 1000
-
+    console.log(start)
+    console.log(end)
+    console.log(isLoggedin)
     if (!isLoggedin.auth) {
       console.log(start)
     }
     else {
       console.log(base64Image)
       axios.post('/auction/auction-publish', {
-        image: "123dadsa",
+        image: base64Image,
         title: title,
         tag: tag,
         description: desc,

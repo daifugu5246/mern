@@ -8,7 +8,7 @@ const router = express.Router();
 setInterval(() => {
     BidArt.find({}).then((docs) => {
         docs.forEach((doc) => {
-            const now = Date.now() + 7 * 3600 * 1000;//set to Asia/Bangkok
+            const now = Date.now().getTime()//set to Asia/Bangkok
             const s = new Date(doc.start_at).getTime();
             const e = new Date(doc.end_at).getTime();
             if (doc.status == 'END') {
@@ -60,8 +60,8 @@ router.post('/auction-publish', (req, res) => {
         artist_id: data.artist_id,
         start_price: data.start_price,
         increment: data.increment,
-        start_at: data.start_at,
-        end_at: data.end_at,
+        start_at: new Date(data.start_at),
+        end_at: new Date(data.end_at),
         status: 'WAITING',
     }).then(() => {
         res.status(201).send("Auction publish successfully");
@@ -89,15 +89,15 @@ router.get('/:img_id', (req, res) => {
     BidArt.findOne({ _id: req.params.img_id })
         .then((art) => {
             data = art;
-            Users.findOne({ _id: art.artist_id})
-            .then((artist) => {
-                res.status(200).json({
-                    art,
-                    artist_info:{
-                        artist_name: artist.name,
-                    }
-                })
-            });
+            Users.findOne({ _id: art.artist_id })
+                .then((artist) => {
+                    res.status(200).json({
+                        art,
+                        artist_info: {
+                            artist_name: artist.name,
+                        }
+                    })
+                });
         }).catch((err) => res.status(500).send("Error find image failed" + err));
 });
 
@@ -143,9 +143,9 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
                 return res.status(400).json({ message: "Your bid is not the highest." });
             }
             //find previous user
-            Users.findById( data.owner_id).then((user) => {
+            Users.findById(data.owner_id).then((user) => {
                 //return leaf to previous user
-                user.leaf +=  data.current_price
+                user.leaf += data.current_price
                 user.save();
             });
             //change current price

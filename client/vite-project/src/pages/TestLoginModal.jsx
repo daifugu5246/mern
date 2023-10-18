@@ -22,7 +22,7 @@ function TestLoginModal() {
             console.log(response.status)
             if (response.status === 200) {
                 console.log(response.data)
-                login(response.data.uid, response.data.username, response.data.name, response.data.description, response.data.leaf, response.data.peach)
+                login(response.data._id, response.data.username, response.data.name, response.data.description, response.data.leaf, response.data.peach)
                 document.getElementById("btnForClose").click()
                 navigate('/auction');
             }

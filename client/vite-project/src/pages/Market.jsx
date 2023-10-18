@@ -109,7 +109,7 @@ export default function Market() {
         }).then((respond) => {
             const arr = respond.data
             arr.forEach(element => {
-                pictureAuction.push(element)
+                if (element.status != "WAITING") pictureAuction.push(element)
             });
             console.log(pictureAuction)
             isloading(true)

@@ -486,7 +486,6 @@ function Detail(data) {
   const [activeAuction, setActiveAuction] = useState(null);
   const [activePlaceABid, setActivePlaceABid] = useState(null);
   const [ch1, setCh1] = useState(false)
-
   const handleAuction = (status) => {
 
     //live
@@ -506,7 +505,6 @@ function Detail(data) {
     }
   };
   useEffect(() => {
-
     /*if (id.status != "END") {
       setevent(state)
     }
@@ -661,7 +659,7 @@ export default function AuctionDetail() {
   if (window.location.pathname != "/auction/debug") {
     axios.get("/auction/" + isEnterAuctionRoom)
       .then((response) => {
-        if (response.status === 200) setid(response.data)
+        if (response.status === 200) setid(response.data.art)
         setloading(false)
       }).catch((error) => {
         console.error(error)
