@@ -107,7 +107,7 @@ export default function Market() {
         axios.get('/auction', {
 
         }).then((respond) => {
-            const arr = respond.data
+            const arr = respond.data.reverse()
             arr.forEach(element => {
                 if (element.status != "WAITING") pictureAuction.push(element)
             });
