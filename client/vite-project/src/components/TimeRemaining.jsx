@@ -21,7 +21,6 @@ class TimeRemaining extends React.Component {
         this.interval = setInterval(() => {
             const now = new Date().getTime();
             const timeRemaining = targetDate - now;
-            console.log(now)
             if (timeRemaining <= 0) {
                 clearInterval(this.interval);
                 state = 0;

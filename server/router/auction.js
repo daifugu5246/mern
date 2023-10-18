@@ -11,7 +11,7 @@ setInterval(() => {
             const now = new Date().getTime()//set to Asia/Bangkok
             const s = new Date(doc.start_at).getTime();
             const e = new Date(doc.end_at).getTime();
-            console.log(now, s, e);
+            //console.log(now, s, e);
             if (doc.status == 'END') {
 
             }
@@ -146,8 +146,10 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             //find previous user
             Users.findById(data.owner_id).then((user) => {
                 //return leaf to previous user
-                user.leaf += data.current_price
-                user.save();
+                if (user != null) {
+                    user.leaf = user.leaf + data.current_price
+                    user.save();
+                }
             });
             //change current price
             data.current_price = req.body.bid_value;
