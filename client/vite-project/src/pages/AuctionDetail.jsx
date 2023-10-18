@@ -134,6 +134,7 @@ function History() {
 }
 
 function AuctionAvailable(data) {
+
   return (
     <div className="row justify-content-center text-center mx-3 my-2">
       <div id="CurrentBid" className="col bg-danger rounded-4 mx-2 py-2 px-4 mb-2">
@@ -148,7 +149,7 @@ function AuctionAvailable(data) {
           <img style={{ maxWidth: "1.25rem" }} className='img-fluid ' src={tea_leaf} />
 
           <div id="CurrentBid_UserName" className="text fw-medium text-nowrap">
-            by UserName
+            by {data.owner_id}
           </div>
         </div>
       </div>
@@ -198,6 +199,7 @@ function AuctionEnd() {
 }
 
 function PlaceABid(data) {
+  const [statebid, setStatebid] = useState(false)
   const { isLoggedin, login } = useLoginContext()
   const [activeModal, setActiveModal] = useState(null);
   const [input, setinput] = useState();
@@ -239,9 +241,9 @@ function PlaceABid(data) {
       }).then((response) => {
         if (response.status == 200) {
           console.log(response)
-          login(isLoggedin.id, isLoggedin.username, isLoggedin.name, isLoggedin.description, isLoggedin.leaf - input, isLoggedin.peach)
           openModal(2)
-          navigate("/auction")
+          setStatebid(response.data.user_leaf)
+
         } else {
           setError("")
           openModal(3)
@@ -265,6 +267,7 @@ function PlaceABid(data) {
   };
   const closeModal = () => {
     setActiveModal(null);
+    if (statebid != false) login(isLoggedin.id, isLoggedin.username, isLoggedin.name, isLoggedin.description, statebid, isLoggedin.peach)
   };
 
 
@@ -495,13 +498,15 @@ function Detail(data) {
   const [activeAuction, setActiveAuction] = useState(null);
   const [activePlaceABid, setActivePlaceABid] = useState(null);
   const [ch1, setCh1] = useState(false)
+  const tag = id.tag.split(" ")
+  console.log(tag)
   const handleAuction = (status) => {
 
     //live
     if (status === 1) {
       setSold(null);
       setActiveLive(<Lived />);
-      setActiveAuction(<AuctionAvailable current={id.current_price} endtime={id.end_at} />);
+      setActiveAuction(<AuctionAvailable current={id.current_price} endtime={id.end_at} owner_id={id.owners_id} />);
       setActivePlaceABid(<PlaceABid id={id._id} increment={id.increment} current={id.current_price} leaf={200} status={id.status} start_price={id.start_price} />);
     }
 
@@ -531,7 +536,7 @@ function Detail(data) {
     }
     // Call handleAuction
 
-  }, [state, event]); // Empty dependency array means this effect only runs once after the initial render
+  }, [state, event, id]); // Empty dependency array means this effect only runs once after the initial render
 
   const handleButtonClick = (button) => {
     if (button === 1) {
@@ -557,7 +562,7 @@ function Detail(data) {
 
               <div className="d-flex z-2 position-absolute gap-2 mt-3 ms-3">
                 <img style={{ maxWidth: "3.5rem" }} className='img-fluid border border-1 border-black rounded-5' src={ProfileId} />
-                <div className="align-self-center text text-white">@UserName</div>
+                <div className="align-self-center text text-white">@Username</div>
               </div>
 
               <div className="position-relative">
@@ -639,9 +644,12 @@ function Detail(data) {
                 Tag:
               </spam>
               <div className="tag_link d-flex flex-wrap gap-2 ">
-                <a href='/vintage'>#vintage</a>
-                <a href='/woman'>#woman</a>
-                <a href='/ButerBye'>#ButerBye</a>
+
+                {tag.map((t, index) => {
+                  return (
+                    <a key={index} href={"/" + t}>{"#" + t}</a>
+                  )
+                })}
               </div>
             </div>
             <hr className="border-2 bg-black opacity-100 mb-1" />
@@ -665,26 +673,30 @@ export default function AuctionDetail() {
   const [loading, setloading] = useState(true)
   const [id, setid] = useState(null);
   const { isEnterAuctionRoom } = useAuctionRoomContext()
+  const { isLoggedin } = useLoginContext()
 
   if (isEnterAuctionRoom == "" && window.location.pathname != "/auction/debug") navigate("/auction")
-  if (window.location.pathname != "/auction/debug") {
-    axios.get("/auction/" + isEnterAuctionRoom)
-      .then((response) => {
-        if (response.status === 200) setid(response.data.art)
-        setloading(false)
-      }).catch((error) => {
-        console.error(error)
-      })
-  }
+
 
   useEffect(() => {
-
+    setloading(true)
     if (window.location.pathname == "/auction/debug") {
       const arr = { _id: "1234", price: "100", title: "imgae", current_price: "1000", increment: "50", status: "END", start_price: "100", end_at: "2023_10_17" }
       setid(arr)
       setloading(false)
     }
-  }, [])
+    else if (window.location.pathname != "/auction/debug") {
+
+      axios.get("/auction/" + isEnterAuctionRoom)
+        .then((response) => {
+          console.log(response.data.art.owner_id)
+          if (response.status === 200) setid(response.data.art)
+          setloading(false)
+        }).catch((error) => {
+          console.error(error)
+        })
+    }
+  }, [isLoggedin.leaf])
 
   if (loading) {
     return (

@@ -109,7 +109,7 @@ export default function Market() {
         }).then((respond) => {
             const arr = respond.data.reverse()
             arr.forEach(element => {
-                if (element.status != "WAITING") pictureAuction.push(element)
+                if (element.status == "LIVE") pictureAuction.push(element)
             });
             console.log(pictureAuction)
             isloading(true)

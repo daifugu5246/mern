@@ -909,9 +909,13 @@ function SideNav() {
 
   useEffect(() => {
 
-    const user = document.getElementById("profile")
-    if (!isLoggedin.auth) user.style.display = "none"
+    if (!isLoggedin.auth) {
+      setUser("profile")
+      const user = document.getElementById("profile")
+      user.style.display = "none"
+    }
     else if (isLoggedin.auth) {
+      const user = document.getElementById("profile")
       user.style.display = "block"
       setUser("profile/" + isLoggedin.id)
     }

@@ -147,7 +147,7 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
                 return res.status(400).json({ message: "Your bid is not the highest." });
             }
             //find previous user
-            Users.findById(data.owner_id).then((user) => {
+            Users.findById(data.owners_id).then((user) => {
                 //return leaf to previous user
                 if (user != null) {
                     user.leaf = user.leaf + data.current_price
@@ -157,7 +157,7 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             //change current price
             data.current_price = req.body.bid_value;
             //change leader
-            data.owner_id = req.body.user_id;
+            data.owners_id = req.body.user_id;
             data.save();
             console.log(data.current_price, data.owner_id);
             Users.findById(req.body.user_id).then((user) => {
