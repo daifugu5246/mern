@@ -54,5 +54,9 @@ const Login = () => {
                     <button type='submit' id='login'>Login</button>
                     <a href='/register'>Don't have account?</a>
                 </fieldset>
-            </form> 
-export default Login*/
+            </form> */
+export default function Login() {
+    return (
+        <></>
+    )
+}

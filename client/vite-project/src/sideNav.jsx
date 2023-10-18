@@ -64,20 +64,49 @@ function ModalArtwork() {
   const [image, setImage] = useState("http://drive.google.com/uc?export=view&id=1cXj8wYhFalP1opSKwAq_zeSMg9oHbwmp")
   const [width, setwidth] = useState("25px")
 
+  const { isLoggedin } = useLoginContext()
 
   const [base64Image, setBase64Image] = useState("");
 
-  const [title, settitle] = useState("")
-  const [tag, settag] = useState("")
-  const [desc, setdesc] = useState("")
-  const [price, setprice] = useState("")
-  const [minimum, setminimum] = useState("")
-  const [startdate, setstartdate] = useState("")
-  const [enddate, setenddate] = useState("")
+  const [title, settitle] = useState()
+  const [tag, settag] = useState()
+  const [desc, setdesc] = useState()
+  const [price, setprice] = useState()
+  const [minimum, setminimum] = useState()
+  const [startdate, setstartdate] = useState()
+  const [enddate, setenddate] = useState()
 
 
   const handleSubmit = (e) => {
-    console.log(base64Image)
+    e.preventDefault()
+    var start = new Date(startdate).getTime() - 25200 * 1000
+    var end = new Date(enddate).getTime() - 25200 * 1000
+
+    if (!isLoggedin.auth) {
+      console.log(start)
+    }
+    else {
+      console.log(base64Image)
+      axios.post('/auction/auction-publish', {
+        image: "123dadsa",
+        title: title,
+        tag: tag,
+        description: desc,
+        artist_id: isLoggedin.id,
+        start_price: price,
+        increment: minimum,
+        start_at: start,
+        end_at: end
+      }).then((response) => {
+        if (response.status == 201) {
+          console.log(response)
+        } else {
+          console.log(response)
+        }
+      }).catch((error) => {
+        console.error(error)
+      })
+    }
 
   }
 
@@ -143,12 +172,11 @@ function ModalArtwork() {
       <div
         id="ArtworkModal"
         className="modal-dialog modal-dialog-scrollable modal-dialog-centered"
+        style={{ maxWidth: "600px" }}
       >
         <div
           className="modal-content"
           style={{
-            width: "800px",
-            height: "918px",
             background: "#FFD7B9",
             justifyContent: "center",
             shadow: " 2px 3px 15px 5px rgba(0, 0, 0, 0.25)",
@@ -159,7 +187,7 @@ function ModalArtwork() {
 
           <div
             className="modal-body"
-            style={{ margin: "0px", padding: "0px" }}
+            style={{ margin: "0px", padding: "0px", maxWidth: "700px" }}
           >
             <ul className="nav">
               <button
@@ -206,7 +234,7 @@ function ModalArtwork() {
                 </li>
               </button>
             </ul>
-            <div className="tab-content" id="pills-tabContent">
+            <div className="tab-content d-flex justify-content-center" id="pills-tabContent">
               <div
                 className="tab-pane fade show active"
                 id="pills-sell"
@@ -466,375 +494,393 @@ function ModalArtwork() {
               </div>
 
               {/* sell body */}
+
               <div
                 className="tab-pane fade"
                 id="pills-auction"
                 role="tabpanel"
                 aria-labelledby="pills-auction-tab"
+
               >
-
-                <input id="getimage" type="file" value="" className="filetype d-none " accept=".png, .jpeg" onChange={onImageChange} />
-                <button
-                  onClick={() => inputImage()}
-                  className="uploadPicButton"
-                  style={{
-                    width: "415px",
-                    height: "269px",
-                    flexShrink: "0",
-                    borderRadius: "45px",
-                    background: "rgba(15, 12, 12, 0.14)",
-                    margin: "20px 34px 20px 34px",
-                    overflow: "hidden"
-                  }}
-                >
-                  <img
-                    className="img-fluid"
-                    src={image}
-                    alt="img"
+                <form onSubmit={handleSubmit}>
+                  <input id="getimage" type="file" value="" className="filetype d-none " accept=".png, .jpeg" onChange={onImageChange} />
+                  <button
+                    onClick={() => inputImage()}
+                    className="uploadPicButton"
                     style={{
-                      objectFit: "cover",
-                      maxWidth: width,
-                      maxHeight: "269px",
-                    }}
-                  />
-
-                </button>
-                <div className="addPicForm" style={{ marginBottom: "20px" }}>
-                  <label
-                    style={{
-                      width: "110px",
-                      height: "35px",
-                      borderRadius: "27px",
-                      background: "#FD997F",
-                      color: "#0F0C0C",
-                      textAlign: "center",
-                      fontSize: "17px",
-                      fontStyle: "normal",
-                      fontWeight: "600",
-                      marginLeft: "40px",
-                      paddingTop: "5px",
+                      width: "415px",
+                      height: "269px",
+                      flexShrink: "0",
+                      borderRadius: "45px",
+                      background: "rgba(15, 12, 12, 0.14)",
+                      margin: "20px 34px 20px 34px",
+                      overflow: "hidden"
                     }}
                   >
-                    Art title
-                  </label>
-                  <input
-                    style={{
-                      width: "275px",
-                      height: "35px",
-                      paddingLeft: "15px",
-                      paddingRight: "15px",
-                      marginLeft: "25px",
-                      borderRadius: "27px",
-                      borderTop: "1px solid #000",
-                      borderRight: "1px solid #000",
-                      borderBottom: "2px solid #000",
-                      borderLeft: "2px solid #000",
-                      background: "#FFEEE1",
-                    }}
-                    value={title}
-                    onChange={(e) => settitle(e.target.value)}
-                    type="text"
-                    placeholder="Limit 50 letters"
-                  ></input>
-                </div>
-
-                <div className="addPicForm" style={{ marginBottom: "20px" }}>
-                  <label
-                    style={{
-                      width: "110px",
-                      height: "35px",
-                      borderRadius: "27px",
-                      background: "#FD997F",
-                      color: "#0F0C0C",
-                      textAlign: "center",
-                      fontSize: "17px",
-                      fontStyle: "normal",
-                      fontWeight: "600",
-                      marginLeft: "40px",
-                      paddingTop: "5px",
-                    }}
-                  >
-                    Tag
-                  </label>
-                  <input
-                    style={{
-                      width: "275px",
-                      height: "35px",
-                      paddingLeft: "15px",
-                      paddingRight: "15px",
-                      marginLeft: "25px",
-                      borderRadius: "27px",
-                      borderTop: "1px solid #000",
-                      borderRight: "1px solid #000",
-                      borderBottom: "2px solid #000",
-                      borderLeft: "2px solid #000",
-                      background: "#FFEEE1",
-                    }}
-                    type="text"
-                    value={tag}
-                    onChange={(e) => settag(e.target.value)}
-                    placeholder="Limit 50 letters"
-                  ></input>
-                </div>
-
-                <div className="addPicForm" style={{ marginBottom: "20px" }}>
-                  <label
-                    style={{
-                      width: "110px",
-                      height: "35px",
-                      borderRadius: "27px",
-                      background: "#FD997F",
-                      color: "#0F0C0C",
-                      textAlign: "center",
-                      fontSize: "17px",
-                      fontStyle: "normal",
-                      fontWeight: "600",
-                      marginLeft: "40px",
-                      paddingTop: "5px",
-                    }}
-                  >
-                    Description
-                  </label>
-                  <input
-                    style={{
-                      width: "275px",
-                      height: "113px",
-                      paddingLeft: "15px",
-                      paddingRight: "15px",
-                      marginLeft: "25px",
-                      borderRadius: "27px",
-                      borderTop: "1px solid #000",
-                      borderRight: "1px solid #000",
-                      borderBottom: "2px solid #000",
-                      borderLeft: "2px solid #000",
-                      background: "#FFEEE1",
-                    }}
-                    value={desc}
-                    onChange={(e) => setdesc(e.target.value)}
-                    type="text"
-                    placeholder="Limit 50 letters"
-                  ></input>
-                </div>
-
-                <div
-                  className="addPicForm"
-                  style={{ marginBottom: "20px", display: "flex" }}
-                >
-                  <label
-                    style={{
-                      width: "110px",
-                      height: "35px",
-                      borderRadius: "27px",
-                      background: "#FD997F",
-                      color: "#0F0C0C",
-                      textAlign: "center",
-                      fontSize: "17px",
-                      fontStyle: "normal",
-                      fontWeight: "600",
-                      marginLeft: "40px",
-                      paddingTop: "5px",
-                    }}
-                  >
-                    Start price
-                  </label>
-                  <input
-
-                    style={{
-                      width: "240px",
-                      height: "35px",
-                      paddingLeft: "15px",
-                      paddingRight: "15px",
-                      marginLeft: "25px",
-                      borderRadius: "27px",
-                      borderTop: "1px solid #000",
-                      borderRight: "1px solid #000",
-                      borderBottom: "2px solid #000",
-                      borderLeft: "2px solid #000",
-                      background: "#FFEEE1",
-                    }}
-                    type="number"
-                    value={price}
-                    onChange={(e) => setprice(e.target.value)}
-                  ></input>
-                  {/*   leaf */}
-                  <img
-                    className="img-fluid"
-                    src="http://drive.google.com/uc?export=view&id=1ZiBlvrC7bcBvaJwdNVErH4gZRbf_X7N4"
-                    alt="img"
-                    style={{
-                      objectFit: "cover",
-                      maxWidth: "35px",
-                      marginLeft: "10px",
-                    }}
-                  />
-                </div>
-
-                <div
-                  className="addPicForm"
-                  style={{ marginBottom: "20px", display: "flex" }}
-                >
-                  <label
-                    style={{
-                      width: "110px",
-                      height: "35px",
-                      borderRadius: "27px",
-                      background: "#FD997F",
-                      color: "#0F0C0C",
-                      textAlign: "center",
-                      fontSize: "15px",
-                      fontStyle: "normal",
-                      fontWeight: "600",
-                      marginLeft: "40px",
-                      paddingTop: "5px",
-                    }}
-                  >
-                    Minimum bid
-                  </label>
-                  <input
-                    style={{
-                      width: "240px",
-                      height: "35px",
-                      paddingLeft: "15px",
-                      paddingRight: "15px",
-                      marginLeft: "25px",
-                      borderRadius: "27px",
-                      borderTop: "1px solid #000",
-                      borderRight: "1px solid #000",
-                      borderBottom: "2px solid #000",
-                      borderLeft: "2px solid #000",
-                      background: "#FFEEE1",
-                    }}
-                    type="number"
-                    value={minimum}
-                    onChange={(e) => setminimum(e.target.value)}
-                  ></input>
-                  {/*   leaf */}
-                  <img
-                    className="img-fluid"
-                    src="http://drive.google.com/uc?export=view&id=1ZiBlvrC7bcBvaJwdNVErH4gZRbf_X7N4"
-                    alt="img"
-                    style={{
-                      objectFit: "cover",
-                      maxWidth: "35px",
-                      marginLeft: "10px",
-                    }}
-                  />
-                </div>
-
-                <div className="addPicForm" style={{ marginBottom: "0px" }}>
-                  <label
-                    style={{
-                      width: "100px",
-                      height: "35px",
-                      borderRadius: "27px",
-                      background: "#FD997F",
-                      color: "#0F0C0C",
-                      textAlign: "center",
-                      fontSize: "17px",
-                      fontStyle: "normal",
-                      fontWeight: "600",
-                      marginLeft: "40px",
-                      paddingTop: "5px",
-                    }}
-                  >
-                    Date start
-                  </label>
-                  <input
-
-                    style={{
-                      width: "100px",
-                      height: "35px",
-                      paddingLeft: "15px",
-                      paddingRight: "15px",
-                      marginLeft: "7px",
-                      borderRadius: "27px",
-                      borderTop: "1px solid #000",
-                      borderRight: "1px solid #000",
-                      borderBottom: "2px solid #000",
-                      borderLeft: "2px solid #000",
-                      background: "#FFEEE1",
-                      fontSize: "12px",
-                    }}
-                    value={startdate}
-                    onChange={(e) => setstartdate(e.target.value)}
-                    type="date"
-                    placeholder="mm/dd/yyyy"
-                  ></input>
-
-                  <label
-                    style={{
-                      width: "100px",
-                      height: "35px",
-                      borderRadius: "27px",
-                      background: "#FD997F",
-                      color: "#0F0C0C",
-                      textAlign: "center",
-                      fontSize: "17px",
-                      fontStyle: "normal",
-                      fontWeight: "600",
-                      marginLeft: "7px",
-                      paddingTop: "5px",
-                    }}
-                  >
-                    Date end
-                  </label>
-                  <input
-                    style={{
-                      width: "100px",
-                      height: "35px",
-                      paddingLeft: "15px",
-                      paddingRight: "15px",
-                      marginLeft: "7px",
-                      borderRadius: "27px",
-                      borderTop: "1px solid #000",
-                      borderRight: "1px solid #000",
-                      borderBottom: "2px solid #000",
-                      borderLeft: "2px solid #000",
-                      background: "#FFEEE1",
-                      fontSize: "12px",
-                    }}
-                    value={enddate}
-                    onChange={(e) => setenddate(e.target.value)}
-                    type="date"
-                    placeholder="mm/dd/yyyy"
-                    required
-                  ></input>
-                </div>
-
-                {/*horizontal line */}
-                <div
-                  className="addPicForm"
-                  style={{ marginBottom: "0px", display: "flex" }}
-                >
-                  <hr
-                    style={{
-                      width: "95%",
-                      marginLeft: "auto",
-                      marginRight: "auto",
-                    }}
-                  ></hr>
-                </div>
-                <div className="modal-footer-centered" style={{ height: "70px" }}>
-                  <div className="text-center ">
-                    <button
-                      type="button"
-                      className="btn"
-                      onClick={handleSubmit}
+                    <img
+                      className="img-fluid"
+                      src={image}
+                      alt="img"
                       style={{
-                        backgroundImage:
-                          "linear-gradient(to left, #F5C6F7 , #FF9C7D )",
-                        border: "solid 2px #0F0C0C",
-                        boxShadow: "2px 2px #0F0C0C",
-                        borderRadius: "45px",
-                        width: "100px",
-                        marginTop: "8px",
+                        objectFit: "cover",
+                        maxWidth: width,
+                        maxHeight: "269px",
+                      }}
+                    />
+
+                  </button>
+                  <div className="addPicForm" style={{ marginBottom: "20px" }}>
+                    <label
+                      style={{
+                        width: "110px",
+                        height: "35px",
+                        borderRadius: "27px",
+                        background: "#FD997F",
+                        color: "#0F0C0C",
+                        textAlign: "center",
+                        fontSize: "17px",
+                        fontStyle: "normal",
+                        fontWeight: "600",
+                        marginLeft: "40px",
+                        paddingTop: "5px",
                       }}
                     >
-                      Publish
-                    </button>
+                      Art title
+                    </label>
+                    <input
+                      style={{
+                        width: "275px",
+                        height: "35px",
+                        paddingLeft: "15px",
+                        paddingRight: "15px",
+                        marginLeft: "25px",
+                        borderRadius: "27px",
+                        borderTop: "1px solid #000",
+                        borderRight: "1px solid #000",
+                        borderBottom: "2px solid #000",
+                        borderLeft: "2px solid #000",
+                        background: "#FFEEE1",
+                      }}
+                      value={title}
+                      onChange={(e) => settitle(e.target.value)}
+                      type="text"
+                      placeholder="Limit 50 letters"
+                      maxLength="50"
+                      required
+                    ></input>
                   </div>
-                </div>
+
+                  <div className="addPicForm" style={{ marginBottom: "20px" }}>
+                    <label
+                      style={{
+                        width: "110px",
+                        height: "35px",
+                        borderRadius: "27px",
+                        background: "#FD997F",
+                        color: "#0F0C0C",
+                        textAlign: "center",
+                        fontSize: "17px",
+                        fontStyle: "normal",
+                        fontWeight: "600",
+                        marginLeft: "40px",
+                        paddingTop: "5px",
+                      }}
+                    >
+                      Tag
+                    </label>
+                    <input
+                      style={{
+                        width: "275px",
+                        height: "35px",
+                        paddingLeft: "15px",
+                        paddingRight: "15px",
+                        marginLeft: "25px",
+                        borderRadius: "27px",
+                        borderTop: "1px solid #000",
+                        borderRight: "1px solid #000",
+                        borderBottom: "2px solid #000",
+                        borderLeft: "2px solid #000",
+                        background: "#FFEEE1",
+                      }}
+                      type="text"
+                      value={tag}
+                      onChange={(e) => settag(e.target.value)}
+                      placeholder="Limit 50 letters"
+                      maxLength="50"
+                      required
+                    ></input>
+                  </div>
+
+                  <div className="addPicForm d-flex" style={{ marginBottom: "20px" }}>
+                    <label
+                      className="align-self-start"
+                      style={{
+                        width: "110px",
+                        height: "35px",
+                        borderRadius: "27px",
+                        background: "#FD997F",
+                        color: "#0F0C0C",
+                        textAlign: "center",
+                        fontSize: "17px",
+                        fontStyle: "normal",
+                        fontWeight: "600",
+                        marginLeft: "40px",
+                        paddingTop: "5px",
+                      }}
+                    >
+                      Description
+                    </label>
+                    <textarea
+                      style={{
+                        width: "275px",
+                        height: "113px",
+                        paddingLeft: "15px",
+                        paddingRight: "15px",
+                        marginLeft: "25px",
+                        borderRadius: "27px",
+                        borderTop: "1px solid #000",
+                        borderRight: "1px solid #000",
+                        borderBottom: "2px solid #000",
+                        borderLeft: "2px solid #000",
+                        background: "#FFEEE1",
+                        resize: "none",
+                      }}
+                      value={desc}
+                      onChange={(e) => setdesc(e.target.value)}
+                      type="text"
+                      placeholder="Limit 150 letters"
+                      maxLength="150"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <div
+                    className="addPicForm"
+                    style={{ marginBottom: "20px", display: "flex" }}
+                  >
+                    <label
+                      style={{
+                        width: "110px",
+                        height: "35px",
+                        borderRadius: "27px",
+                        background: "#FD997F",
+                        color: "#0F0C0C",
+                        textAlign: "center",
+                        fontSize: "17px",
+                        fontStyle: "normal",
+                        fontWeight: "600",
+                        marginLeft: "40px",
+                        paddingTop: "5px",
+                      }}
+                    >
+                      Start price
+                    </label>
+                    <input
+
+                      style={{
+                        width: "240px",
+                        height: "35px",
+                        paddingLeft: "15px",
+                        paddingRight: "15px",
+                        marginLeft: "25px",
+                        borderRadius: "27px",
+                        borderTop: "1px solid #000",
+                        borderRight: "1px solid #000",
+                        borderBottom: "2px solid #000",
+                        borderLeft: "2px solid #000",
+                        background: "#FFEEE1",
+                      }}
+                      min="1"
+                      type="number"
+                      value={price}
+                      onChange={(e) => setprice(e.target.value)}
+                      pattern="[0-9]*"
+                      required
+                    ></input>
+                    {/*   leaf */}
+                    <img
+                      className="img-fluid"
+                      src="http://drive.google.com/uc?export=view&id=1ZiBlvrC7bcBvaJwdNVErH4gZRbf_X7N4"
+                      alt="img"
+                      style={{
+                        objectFit: "cover",
+                        maxWidth: "35px",
+                        marginLeft: "10px",
+                      }}
+                    />
+                  </div>
+
+                  <div
+                    className="addPicForm"
+                    style={{ marginBottom: "20px", display: "flex" }}
+                  >
+                    <label
+                      style={{
+                        width: "110px",
+                        height: "35px",
+                        borderRadius: "27px",
+                        background: "#FD997F",
+                        color: "#0F0C0C",
+                        textAlign: "center",
+                        fontSize: "15px",
+                        fontStyle: "normal",
+                        fontWeight: "600",
+                        marginLeft: "40px",
+                        paddingTop: "5px",
+                      }}
+                    >
+                      Minimum bid
+                    </label>
+                    <input
+                      style={{
+                        width: "240px",
+                        height: "35px",
+                        paddingLeft: "15px",
+                        paddingRight: "15px",
+                        marginLeft: "25px",
+                        borderRadius: "27px",
+                        borderTop: "1px solid #000",
+                        borderRight: "1px solid #000",
+                        borderBottom: "2px solid #000",
+                        borderLeft: "2px solid #000",
+                        background: "#FFEEE1",
+                      }}
+                      min="1"
+                      type="number"
+                      value={minimum}
+                      onChange={(e) => setminimum(e.target.value)}
+                      pattern="[0-9]*"
+                      required
+                    ></input>
+                    {/*   leaf */}
+                    <img
+                      className="img-fluid"
+                      src="http://drive.google.com/uc?export=view&id=1ZiBlvrC7bcBvaJwdNVErH4gZRbf_X7N4"
+                      alt="img"
+                      style={{
+                        objectFit: "cover",
+                        maxWidth: "35px",
+                        marginLeft: "10px",
+                      }}
+                    />
+                  </div>
+
+                  <div className="addPicForm" style={{ marginBottom: "0px" }}>
+                    <label
+                      style={{
+                        width: "100px",
+                        height: "35px",
+                        borderRadius: "27px",
+                        background: "#FD997F",
+                        color: "#0F0C0C",
+                        textAlign: "center",
+                        fontSize: "17px",
+                        fontStyle: "normal",
+                        fontWeight: "600",
+                        marginLeft: "40px",
+                        paddingTop: "5px",
+                      }}
+                    >
+                      Date start
+                    </label>
+                    <input
+
+                      style={{
+                        width: "100px",
+                        height: "35px",
+                        paddingLeft: "15px",
+                        paddingRight: "15px",
+                        marginLeft: "7px",
+                        borderRadius: "27px",
+                        borderTop: "1px solid #000",
+                        borderRight: "1px solid #000",
+                        borderBottom: "2px solid #000",
+                        borderLeft: "2px solid #000",
+                        background: "#FFEEE1",
+                        fontSize: "12px",
+                      }}
+                      value={startdate}
+                      onChange={(e) => setstartdate(e.target.value)}
+                      type="date"
+                      placeholder="mm/dd/yyyy"
+                      required
+                    ></input>
+
+                    <label
+                      style={{
+                        width: "100px",
+                        height: "35px",
+                        borderRadius: "27px",
+                        background: "#FD997F",
+                        color: "#0F0C0C",
+                        textAlign: "center",
+                        fontSize: "17px",
+                        fontStyle: "normal",
+                        fontWeight: "600",
+                        marginLeft: "7px",
+                        paddingTop: "5px",
+                      }}
+                    >
+                      Date end
+                    </label>
+                    <input
+                      style={{
+                        width: "100px",
+                        height: "35px",
+                        paddingLeft: "15px",
+                        paddingRight: "15px",
+                        marginLeft: "7px",
+                        borderRadius: "27px",
+                        borderTop: "1px solid #000",
+                        borderRight: "1px solid #000",
+                        borderBottom: "2px solid #000",
+                        borderLeft: "2px solid #000",
+                        background: "#FFEEE1",
+                        fontSize: "12px",
+                      }}
+                      value={enddate}
+                      onChange={(e) => setenddate(e.target.value)}
+                      type="date"
+                      placeholder="mm/dd/yyyy"
+                      required
+                    ></input>
+                  </div>
+
+                  {/*horizontal line */}
+                  <div
+                    className="addPicForm"
+                    style={{ marginBottom: "0px", display: "flex" }}
+                  >
+                    <hr
+                      style={{
+                        width: "95%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                      }}
+                    ></hr>
+                  </div>
+                  <div className="modal-footer-centered" style={{ height: "70px" }}>
+                    <div className="text-center ">
+                      <button
+                        type="submit"
+                        className="btn"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(to left, #F5C6F7 , #FF9C7D )",
+                          border: "solid 2px #0F0C0C",
+                          boxShadow: "2px 2px #0F0C0C",
+                          borderRadius: "45px",
+                          width: "100px",
+                          marginTop: "8px",
+                        }}
+                      >
+                        Publish
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
+
             </div>
           </div>
 

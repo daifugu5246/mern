@@ -10,21 +10,23 @@ import topup from '../assets/add.png'
 import withdraw from '../assets/minus.png'
 import { useLoginContext } from '../context/loginContext'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Profile() {
     const navigate = useNavigate()
     const { isLoggedin } = useLoginContext()
-
-    const [name, setName] = useState("Peachy");
-    const [username, setUser] = useState("MasterPeach");
-    const [descript, setDescript] = useState(`Welcome to MasterPeach`);
-    const [leaf, setLeaf] = useState(999999);
-    const [peach, setPeach] = useState(999999);
+    const [name, setName] = useState(isLoggedin.name);
+    const [username, setUser] = useState(isLoggedin.username);
+    const [descript, setDescript] = useState(isLoggedin.description);
+    const [leaf, setLeaf] = useState(isLoggedin.leaf);
+    const [peach, setPeach] = useState(isLoggedin.peach);
 
     {/*--------- Button ColorState ---------*/ }
     const [tabState, setTabState] = useState(0);
     useEffect(() => {
-        if (!isLoggedin.auth) navigate("/auction")
+        if (!isLoggedin.auth) {
+            navigate("/auction")
+        }
 
         const workart = document.getElementById("WorkArt");
         const collect = document.getElementById("Collect");
@@ -76,7 +78,7 @@ export default function Profile() {
 
     return (
         <div className="container">
-            <div className='d-flex justify-content-center align-items-center gap-5'>
+            <div className='d-flex justify-content-center align-items-center gap-5 '>
                 <div id="Profile" className='d-flex row'
                     style={{ backgroundColor: "#FFF6F5", width: "380px", height: "485px", border: "solid 2px #0F0C0C", boxShadow: "2px 2px #0F0C0C", borderRadius: "45px" }}>
                     {/*-------------------- Header + Image Profile ----------------------*/}
@@ -111,7 +113,7 @@ export default function Profile() {
                     </div>
                 </div>
 
-                <div id="Picture" className='d-flex'
+                <div id="Picture" className='d-flex '
                     style={{ backgroundColor: "#FBCAC482", width: "750px", height: "515px", borderRadius: "25px" }} >
                     <header className='container d-flex p-4 gap-4'>
                         {/* --------- Artwork button --------------------------------------------------*/}
