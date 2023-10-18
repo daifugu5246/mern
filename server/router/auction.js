@@ -87,8 +87,17 @@ router.get('/', (req, res) => {
 //[finish] ข้อมูลของรูปเดี่ยวๆเมื่อคลิดกเข้าไปดูห้องประมูล
 router.get('/:img_id', (req, res) => {
     BidArt.findOne({ _id: req.params.img_id })
-        .then((data) => {
-            res.status(200).json(data)
+        .then((art) => {
+            data = art;
+            Users.findOne({ _id: art.artist_id})
+            .then((artist) => {
+                res.status(200).json({
+                    art,
+                    artist_info:{
+                        artist_name: artist.name,
+                    }
+                })
+            });
         }).catch((err) => res.status(500).send("Error find image failed" + err));
 });
 
