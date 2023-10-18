@@ -213,7 +213,6 @@ function PlaceABid(data) {
   const [input, setinput] = useState();
   const [error, setError] = useState();
   const [st, setSt] = useState();
-  const navigate = useNavigate()
 
   if (data.status == "LIVE" && st == null) {
     setSt(1)

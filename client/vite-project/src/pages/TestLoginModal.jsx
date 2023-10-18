@@ -1,4 +1,3 @@
-import React from 'react'
 import logo from '../assets/png-masterpeach/Icon/logo-draft-resize.png'
 import login_BG from '../assets/login_BG.jpg'
 import { useState } from 'react'
@@ -10,8 +9,7 @@ function TestLoginModal() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [errorText, setErrorText] = useState('')
-    const { isLoggedin, login } = useLoginContext()
+    const { login } = useLoginContext()
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -25,9 +23,6 @@ function TestLoginModal() {
                 login(response.data._id, response.data.username, response.data.name, response.data.description, response.data.leaf, response.data.peach)
                 document.getElementById("btnForClose").click()
                 navigate('/auction');
-            }
-            else {
-                setErrorText(response.data)
             }
         }).catch((error) => {
             console.error(error)
