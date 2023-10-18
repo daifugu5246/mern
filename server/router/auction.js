@@ -105,13 +105,13 @@ router.get('/:img_id', (req, res) => {
         }).catch((err) => res.status(500).send("Error find image failed" + err));
 });
 
-router.get('get-owners/:owners_id', (req, res) => {
+router.get('/get-owners/:owners_id', (req, res) => {
     Users.findOne({ _id: req.params.owners_id })
-    .then((owners) => {
-        res.status(200).json({
-            owners_username: owners.username,
+        .then((owners) => {
+            res.status(200).json({
+                owners_username: owners.username,
+            });
         });
-    });
 });
 //[finish] อัพเดตค่า status ,current_price ให้กับ fornt-end จะเรียกใช้เมื่อต้องการเปลี่ยนสถานะ
 router.get('/:img_id/update', (req, res) => {
