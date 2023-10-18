@@ -5,6 +5,8 @@ import leaf from '../assets/tea-leaf.png'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuctionRoomContext } from '../context/auctionRoomContext'
+import { useLoginContext } from '../context/loginContext'
+import TestLoginModal from './TestLoginModal'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 let pictureAuction = [
@@ -18,24 +20,44 @@ const pictureSelling = [
 ]
 function Auction() {
     const navigate = useNavigate()
-    const { enterAuctionRoom } = useAuctionRoomContext()
+    const { isEnterAuctionRoom, enterAuctionRoom } = useAuctionRoomContext()
+    enterAuctionRoom("")
+    const { isLoggedin } = useLoginContext()
+    const [id, setid] = useState()
 
     const handleToAuctionRoom = (id) => {
-        enterAuctionRoom(id)
-        navigate("/AuctionDetail")
+        setid(id)
+        if (isLoggedin.auth) {
+            enterAuctionRoom(id)
+            navigate("/auction/" + id)
+        } else {
+            document.getElementById("LoginButton").click()
+        }
     }
-    useEffect(() => {
 
-    })
+    useEffect(() => {
+        document.getElementById("InvisibleLogin").style.display = "none"
+        if (isEnterAuctionRoom == "" && id != null) {
+            enterAuctionRoom(id)
+            navigate("/auction/" + id)
+        }
+    }, [isLoggedin])
     return (
         <div id="AuctionPage" >
+            <div id="InvisibleLogin">
+                <TestLoginModal />
+            </div>
+
             <div className='row mt-4' >
                 {pictureAuction.map((picture, index) => {
                     return (
 
-                        <div key={index} className='col-3 mb-3' onClick={() => handleToAuctionRoom(picture._id)}>
-                            <div className='ShadowObj rounded' style={{ minHeight: "322px" }}>
-                                <img style={{ height: "240px", width: "293px", objectFit: "cover" }} loading='lazy' className='' src={"data:image/jpeg;base64," + picture.image} alt={picture.title} />
+                        <div key={index} className='col-3 mb-3 ' onClick={() => handleToAuctionRoom(picture._id)} style={{ cursor: "pointer" }}>
+                            <div className='ShadowObj rounded' style={{ maxHeight: "322px", maxWidth: "293px", overflow: "hidden", backgroundColor: "#f9b5b4" }}>
+                                <div className='' style={{ maxHeight: "240px", maxWidth: "293px", overflow: "hidden" }}>
+                                    <img style={{ objectFit: "cover" }} loading='lazy' className='img-fluid' src={"data:image/jpeg;base64," + picture.image} alt={picture.title} />
+                                </div>
+
                                 <div style={{ minHeight: "82px", borderTop: "3.5px solid #0F0C0C" }} className='d-flex align-items-center justify-content-center'>
                                     <img style={{ maxWidth: "30px" }} className='img-fluid me-2 mb-2' src={leaf} />
                                     <h4 className='fw-bold'>{picture.current_price}</h4>

@@ -48,32 +48,29 @@ function Loggedin(data) {
                 <Link className="navbar-brand me-5" to="/">
                     <img style={{ maxWidth: "40px" }} className='img-fluid' src={logo} />
                 </Link>
+                <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
+                    <input className="form-control me-2 rounded-pill border-0 nosubmit" type="search" id='Searchbar' name='Searchbar' placeholder='Search...' aria-label="Search" />
+                    <button id='btn-Search' className="btn rounded-pill px-4" type="submit">Search</button>
+                </form>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse ms-5 position-relative d-flex align-items-center" id="navbarSupportedContent">
-                    <form className="d-flex ">
-                        <input className="form-control me-2 rounded-pill border-0 nosubmit" type="search" id='Searchbar' name='Searchbar' placeholder='Search...' aria-label="Search" />
-                        <button id='btn-Search' className="btn rounded-pill px-4" type="submit">Search</button>
-                    </form>
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 position-absolute end-0 d-flex align-items-center">
-                        <li className="nav-item">
+                <div className="collapse navbar-collapse d-lg-flex justify-content-end " id="navbarSupportedContent">
+                    <ul className="d-flex justify-content-between align-items-center my-auto  ">
+                        <li className="nav-item d-inline-block">
                             <img style={{ maxWidth: "25px" }} className='img-fluid me-3' src={leaf} />
                             <Link id='leaf' className="btn rounded-pill px-4" to="#">{data.leaf}</Link>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item d-inline-block">
                             <img style={{ maxWidth: "25px" }} className='img-fluid mx-3' src={peach} />
                             <Link id='peach' className="btn rounded-pill px-4" to="#">{data.peach}</Link>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item d-inline-block">
                             <Link><img style={{ maxWidth: "45px", backgroundColor: "#FDE4D0" }} className='mx-3 border rounded-circle p-2' src={basket} /></Link>
-
-
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item d-inline-block">
                             <button id='btn-Log_out' className="btn rounded-pill px-4" type="button" onClick={() => Logout()}>Log out</button>
                         </li>
-
                     </ul>
 
                 </div>

@@ -34,7 +34,7 @@ function App() {
           <Route path="/artwork" element={<Artwork />} />
           <Route path="/trend" element={<Trend />} />
           <Route path="/TestLoginModal" element={<TestLoginModal />} />
-          <Route path="/AuctionDetail" element={<AuctionDetail />} />
+          <Route path="/auction/:id" element={<AuctionDetail />} />
         </Routes>
       </div>
     </div>

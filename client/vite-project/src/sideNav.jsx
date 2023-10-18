@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
+
+import person from "./assets/person.png"
+import cart from "./assets/cart.png"
+import artwork from "./assets/artwork.png"
 import noti from "./assets/noti.png";
 import setting from "./assets/setting.png";
 import question from "./assets/question.png";
+
+
 import axios from "axios";
 import { useLoginContext } from "./context/loginContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,17 +16,24 @@ axios.defaults.baseURL = "http://localhost:5000";
 
 
 function Circle(data) {
+
   function hoverCircle() {
     const idcircle = document.getElementById(data.title);
-    idcircle.style.transition = "all 0.2s"
-    idcircle.style.backgroundColor = "#FCD3B4";
+    idcircle.style.transition = "all 0.2s";
+    if (data.path != data.state) idcircle.style.backgroundColor = "#F3C4BE"
+
   }
   function normalCircle() {
     const idcircle = document.getElementById(data.title);
     idcircle.style.transition = "all 0.2s";
-    idcircle.style.backgroundColor = "#ffeee1";
+    if (data.path != data.state) idcircle.style.backgroundColor = "#ffeee1";
+    else idcircle.style.backgroundColor = "#F3C4BE";
   }
-
+  useEffect(() => {
+    const idcircle = document.getElementById(data.title);
+    idcircle.style.transition = "all 0.2s";
+    if (data.state != data.path) idcircle.style.backgroundColor = "#ffeee1";
+  }, [data.state])
 
   return (
     <div
@@ -29,19 +42,18 @@ function Circle(data) {
       onMouseOver={() => hoverCircle()}
       onMouseOut={() => normalCircle()}
     >
-      <Link to={"/" + data.path}>
-        <div
-          id={data.title}
-          className="container-fluid rounded-circle border border-dark  p-3 d-flex justify-content-center border bgCircle"
-        >
-          <img
-            className="img-fluid"
-            src={data.image}
-            alt="img"
-            style={{ objectFit: "cover", maxWidth: "25px" }}
-          />
-        </div>
-      </Link>
+
+      <div
+        id={data.title}
+        className="container-fluid rounded-circle border border-dark  p-3 d-flex justify-content-center border bgCircle"
+      >
+        <img
+          className="img-fluid"
+          src={data.image}
+          alt="img"
+          style={{ objectFit: "cover", maxWidth: "25px" }}
+        />
+      </div>
       <p>{data.title}</p>
     </div>
   );
@@ -835,8 +847,16 @@ function ModalArtwork() {
 
 function SideNav() {
 
-  const { isLoggedin } = useLoginContext();
+  const pathnow = window.location.pathname
+  if (pathnow != "/") pathnow.substring(1)
+  const { isLoggedin } = useLoginContext()
+  const [pagestate, setPagestate] = useState(pathnow)
+  const navigate = useNavigate()
 
+  const NavigatePath = (path) => {
+    setPagestate(path)
+    navigate("/" + path)
+  }
 
   useEffect(() => {
     const user = document.getElementById("profile")
@@ -848,57 +868,48 @@ function SideNav() {
   return (
     <div
       id="SideNavbar"
-      className="my-3 container  d-flex flex-column align-items-center justify-content-center p-1 py-4"
+      className="my-3 container  d-flex flex-column align-items-center justify-content-center p-3 py-4"
     >
-      <Circle
-        image="https://cdn-icons-png.flaticon.com/512/747/747376.png"
-        title="User"
-        path="profile"
-      />
-      <Circle
-        image="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
-        title="Market"
-        path="auction"
-      />
+      <div onClick={() => NavigatePath("profile")}>
+        <Circle
+          image={person}
+          title="User"
+          path="profile"
+          state={pagestate}
+        />
+      </div>
+      <div onClick={() => NavigatePath("auction")}>
+        <Circle
+          image={cart}
+          title="Market"
+          path="auction"
+          state={pagestate}
+        />
+      </div>
 
       {/*-------- Modal Artwork -------- */}
       {/*button*/}
-      <button
-        type="button"
-        className="btn"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        onClick={() => document.getElementById("pills-sell-tab").click()}
-      >
-        <div id="artwork" className="text-center ">
-          <div
-            id="Artwork"
-            className="container-fluid rounded-circle border border-dark  p-3 d-flex justify-content-center border bgCircle"
-          >
-            <img
-              className="img-fluid"
-              src="https://cdn-icons-png.flaticon.com/512/10493/10493896.png"
-              alt="img"
-              style={{
-                objectFit: "cover",
-                maxWidth: "25px",
-                radius: "45px",
-                border: "1px solid #000",
-              }}
-            />
-          </div>
-          <p>Artwork</p>
-        </div>
-      </button>
+      <div onClick={() => document.getElementById("pills-sell-tab").click()} data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <Circle
+          image={artwork}
+          title="Artwork"
+          path="artwork"
+          state={pagestate}
+        />
+      </div>
 
       {/*in button*/}
       <ModalArtwork />
 
-      <Circle
-        image="https://cdn-icons-png.flaticon.com/512/6633/6633232.png"
-        title="Trend"
-        path="trend"
-      />
+
+      <div onClick={() => NavigatePath("trend")}>
+        <Circle
+          image="https://cdn-icons-png.flaticon.com/512/6633/6633232.png"
+          title="Trend"
+          path="trend"
+          state={pagestate}
+        />
+      </div>
 
       <div
         id="AlertNav"

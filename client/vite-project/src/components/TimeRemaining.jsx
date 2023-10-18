@@ -2,6 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
+var state = 1;
+
 class TimeRemaining extends React.Component {
     constructor(props) {
         super(props);
@@ -15,14 +17,14 @@ class TimeRemaining extends React.Component {
 
     componentDidMount() {
         // Set the target date and time here
-        const targetDate = new Date('2023-10-12T23:59:59').getTime();
+        const targetDate = new Date(this.props.endtime) - (25200 * 1000)
 
         this.interval = setInterval(() => {
-            const now = new Date().getTime();
+            const now = new Date();
             const timeRemaining = targetDate - now;
-
             if (timeRemaining <= 0) {
                 clearInterval(this.interval);
+                state = 0;
                 return;
             }
 
@@ -59,4 +61,4 @@ class TimeRemaining extends React.Component {
     }
 }
 
-export default TimeRemaining;
+export { TimeRemaining, state };
