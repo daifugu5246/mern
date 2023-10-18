@@ -93,6 +93,7 @@ router.get('/:img_id', (req, res) => {
     BidArt.findOne({ _id: req.params.img_id })
         .then((art) => {
             data = art;
+            console.log(art.artist_id);
             Users.findOne({ _id: art.artist_id })
                 .then((artist) => {
                     res.status(200).json({
@@ -108,9 +109,11 @@ router.get('/:img_id', (req, res) => {
 router.get('/get-owners/:owners_id', (req, res) => {
     Users.findOne({ _id: req.params.owners_id })
         .then((owners) => {
-            res.status(200).json({
-                owners_username: owners.username,
-            });
+            if (owners != null){
+                res.status(200).json({
+                    owners_username: owners.username,
+                });
+            }
         });
 });
 //[finish] อัพเดตค่า status ,current_price ให้กับ fornt-end จะเรียกใช้เมื่อต้องการเปลี่ยนสถานะ
