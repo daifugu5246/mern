@@ -148,8 +148,13 @@ router.patch('/:img_id/bid-confirm', (req, res) => {
             //find previous user
             Users.findById(data.owner_id).then((user) => {
                 //return leaf to previous user
+<<<<<<< HEAD
                 if(user != null){
                     user.leaf = data.current_price
+=======
+                if (user != null) {
+                    user.leaf = user.leaf + data.current_price
+>>>>>>> 1c5737a0d4c24e7961766d9f40c36be34b4b6940
                     user.save();
                 }
             });

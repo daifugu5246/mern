@@ -203,17 +203,20 @@ function PlaceABid(data) {
   const [input, setinput] = useState();
   const [error, setError] = useState();
   const [st, setSt] = useState();
+  const navigate = useNavigate()
+
   if (data.status == "LIVE" && st == null) {
     setSt(1)
   } else if (data.status == "END" && st == null) {
     setSt(0)
   }
   const Display = () => {
-    if (input == null) return data.leaf
-    else return data.leaf - input
+    if (input == null) return isLoggedin.leaf
+    else return isLoggedin.leaf - input
   }
 
-  const check = () => {
+  const check = (e) => {
+    e.preventDefault()
     if (input % 1 != 0) {
       console.log()
     }
@@ -222,17 +225,19 @@ function PlaceABid(data) {
       setError("")
       openModal(4);
     }
-    else if (data.leaf - input < 0) {
+    else if (isLoggedin.leaf - input < 0) {
       setError("You don’t have enough Leaf")
       openModal(3);
     }
-    else if (data.leaf >= input) {
+    else if (isLoggedin.leaf >= input) {
       axios.patch("/auction/" + data.id + "/bid-confirm", {
-        user_id: isLoggedin,
+        user_id: isLoggedin.id,
         current_price: input,
-      }).then((reponse) => {
-        if (reponse.status == 200) {
+      }).then((response) => {
+        if (response.status == 200) {
+          console.log(response)
           openModal(2)
+          navigate("/auction")
         } else {
           setError("")
           openModal(3)
@@ -247,7 +252,7 @@ function PlaceABid(data) {
   }
 
   const invalid = (e) => {
-    if (input == null) e.target.setCustomValidity("amount required")
+    if (input == null) e.target.setCustomValidity("Amount required")
     else if (input % 1.0 != 0 || input < 0) e.target.setCustomValidity("Cardinal Number only")
   }
 
@@ -269,7 +274,7 @@ function PlaceABid(data) {
       {activeModal === 1 && (
         <div id="Place_Modal" className="modal d-block pt-5" tabIndex="-1">
           {/* Modal 1 content */}
-          <form onSubmit={() => check()}>
+          <form onSubmit={(e) => check(e)}>
             <div className="modal-dialog">
               <div id="Place_Modal_Content" className="modal-content bg-danger border border-0 rounded-5">
                 <div className="position-absolute top-0 end-0 p-3">
@@ -311,7 +316,7 @@ function PlaceABid(data) {
                     </span>
                     <div className="d-flex align-items-center gap-1">
                       <span>
-                        {data.leaf}
+                        {isLoggedin.leaf}
                       </span>
                       <img style={{ maxWidth: "1.25rem" }} className='img-fluid ' src={tea_leaf} />
                     </div>
@@ -656,6 +661,7 @@ export default function AuctionDetail() {
   const [loading, setloading] = useState(true)
   const [id, setid] = useState(null);
   const { isEnterAuctionRoom } = useAuctionRoomContext()
+
   if (isEnterAuctionRoom == "" && window.location.pathname != "/auction/debug") navigate("/auction")
   if (window.location.pathname != "/auction/debug") {
     axios.get("/auction/" + isEnterAuctionRoom)
@@ -668,6 +674,7 @@ export default function AuctionDetail() {
   }
 
   useEffect(() => {
+
     if (window.location.pathname == "/auction/debug") {
       const arr = { _id: "1234", price: "100", title: "imgae", current_price: "1000", increment: "50", status: "END", start_price: "100", end_at: "2023_10_17" }
       setid(arr)
