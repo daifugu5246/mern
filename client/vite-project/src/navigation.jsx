@@ -39,8 +39,9 @@ function Loggedin(data) {
     const { logout } = useLoginContext()
     const navigate = useNavigate()
     function Logout() {
-        logout()
         navigate("/")
+        window.location.reload();
+
     }
     return (
         <nav id='TopNavbar' className="navbar navbar-expand-lg navbar-light border-bottom border-dark loggedin">
